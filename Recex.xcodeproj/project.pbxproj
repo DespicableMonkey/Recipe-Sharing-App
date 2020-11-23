@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		79578011256C4C6100D1B2AC /* RecexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578010256C4C6100D1B2AC /* RecexApp.swift */; };
+		79578013256C4C6100D1B2AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578012256C4C6100D1B2AC /* ContentView.swift */; };
+		79578015256C4C6300D1B2AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79578014256C4C6300D1B2AC /* Assets.xcassets */; };
+		79578018256C4C6300D1B2AC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79578017256C4C6300D1B2AC /* Preview Assets.xcassets */; };
+		7957801A256C4C6300D1B2AC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578019256C4C6300D1B2AC /* Persistence.swift */; };
+		7957801D256C4C6300D1B2AC /* Recex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7957801B256C4C6300D1B2AC /* Recex.xcdatamodeld */; };
+		79578028256C4C6300D1B2AC /* RecexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578027256C4C6300D1B2AC /* RecexTests.swift */; };
+		79578033256C4C6300D1B2AC /* RecexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578032256C4C6300D1B2AC /* RecexUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		79578024256C4C6300D1B2AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 79578005256C4C6100D1B2AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7957800C256C4C6100D1B2AC;
+			remoteInfo = Recex;
+		};
+		7957802F256C4C6300D1B2AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 79578005256C4C6100D1B2AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7957800C256C4C6100D1B2AC;
+			remoteInfo = Recex;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7957800D256C4C6100D1B2AC /* Recex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79578010256C4C6100D1B2AC /* RecexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecexApp.swift; sourceTree = "<group>"; };
+		79578012256C4C6100D1B2AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		79578014256C4C6300D1B2AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79578017256C4C6300D1B2AC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		79578019256C4C6300D1B2AC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		7957801C256C4C6300D1B2AC /* Recex.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recex.xcdatamodel; sourceTree = "<group>"; };
+		7957801E256C4C6300D1B2AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79578023256C4C6300D1B2AC /* RecexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		79578027256C4C6300D1B2AC /* RecexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecexTests.swift; sourceTree = "<group>"; };
+		79578029256C4C6300D1B2AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7957802E256C4C6300D1B2AC /* RecexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		79578032256C4C6300D1B2AC /* RecexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecexUITests.swift; sourceTree = "<group>"; };
+		79578034256C4C6300D1B2AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7957800A256C4C6100D1B2AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79578020256C4C6300D1B2AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7957802B256C4C6300D1B2AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		79578004256C4C6100D1B2AC = {
+			isa = PBXGroup;
+			children = (
+				7957800F256C4C6100D1B2AC /* Recex */,
+				79578026256C4C6300D1B2AC /* RecexTests */,
+				79578031256C4C6300D1B2AC /* RecexUITests */,
+				7957800E256C4C6100D1B2AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7957800E256C4C6100D1B2AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7957800D256C4C6100D1B2AC /* Recex.app */,
+				79578023256C4C6300D1B2AC /* RecexTests.xctest */,
+				7957802E256C4C6300D1B2AC /* RecexUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7957800F256C4C6100D1B2AC /* Recex */ = {
+			isa = PBXGroup;
+			children = (
+				79578010256C4C6100D1B2AC /* RecexApp.swift */,
+				79578012256C4C6100D1B2AC /* ContentView.swift */,
+				79578014256C4C6300D1B2AC /* Assets.xcassets */,
+				79578019256C4C6300D1B2AC /* Persistence.swift */,
+				7957801E256C4C6300D1B2AC /* Info.plist */,
+				7957801B256C4C6300D1B2AC /* Recex.xcdatamodeld */,
+				79578016256C4C6300D1B2AC /* Preview Content */,
+			);
+			path = Recex;
+			sourceTree = "<group>";
+		};
+		79578016256C4C6300D1B2AC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				79578017256C4C6300D1B2AC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		79578026256C4C6300D1B2AC /* RecexTests */ = {
+			isa = PBXGroup;
+			children = (
+				79578027256C4C6300D1B2AC /* RecexTests.swift */,
+				79578029256C4C6300D1B2AC /* Info.plist */,
+			);
+			path = RecexTests;
+			sourceTree = "<group>";
+		};
+		79578031256C4C6300D1B2AC /* RecexUITests */ = {
+			isa = PBXGroup;
+			children = (
+				79578032256C4C6300D1B2AC /* RecexUITests.swift */,
+				79578034256C4C6300D1B2AC /* Info.plist */,
+			);
+			path = RecexUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7957800C256C4C6100D1B2AC /* Recex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79578037256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "Recex" */;
+			buildPhases = (
+				79578009256C4C6100D1B2AC /* Sources */,
+				7957800A256C4C6100D1B2AC /* Frameworks */,
+				7957800B256C4C6100D1B2AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Recex;
+			productName = Recex;
+			productReference = 7957800D256C4C6100D1B2AC /* Recex.app */;
+			productType = "com.apple.product-type.application";
+		};
+		79578022256C4C6300D1B2AC /* RecexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7957803A256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "RecexTests" */;
+			buildPhases = (
+				7957801F256C4C6300D1B2AC /* Sources */,
+				79578020256C4C6300D1B2AC /* Frameworks */,
+				79578021256C4C6300D1B2AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79578025256C4C6300D1B2AC /* PBXTargetDependency */,
+			);
+			name = RecexTests;
+			productName = RecexTests;
+			productReference = 79578023256C4C6300D1B2AC /* RecexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7957802D256C4C6300D1B2AC /* RecexUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7957803D256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "RecexUITests" */;
+			buildPhases = (
+				7957802A256C4C6300D1B2AC /* Sources */,
+				7957802B256C4C6300D1B2AC /* Frameworks */,
+				7957802C256C4C6300D1B2AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79578030256C4C6300D1B2AC /* PBXTargetDependency */,
+			);
+			name = RecexUITests;
+			productName = RecexUITests;
+			productReference = 7957802E256C4C6300D1B2AC /* RecexUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		79578005256C4C6100D1B2AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					7957800C256C4C6100D1B2AC = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					79578022256C4C6300D1B2AC = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 7957800C256C4C6100D1B2AC;
+					};
+					7957802D256C4C6300D1B2AC = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 7957800C256C4C6100D1B2AC;
+					};
+				};
+			};
+			buildConfigurationList = 79578008256C4C6100D1B2AC /* Build configuration list for PBXProject "Recex" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 79578004256C4C6100D1B2AC;
+			productRefGroup = 7957800E256C4C6100D1B2AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7957800C256C4C6100D1B2AC /* Recex */,
+				79578022256C4C6300D1B2AC /* RecexTests */,
+				7957802D256C4C6300D1B2AC /* RecexUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7957800B256C4C6100D1B2AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79578018256C4C6300D1B2AC /* Preview Assets.xcassets in Resources */,
+				79578015256C4C6300D1B2AC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79578021256C4C6300D1B2AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7957802C256C4C6300D1B2AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		79578009256C4C6100D1B2AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7957801A256C4C6300D1B2AC /* Persistence.swift in Sources */,
+				7957801D256C4C6300D1B2AC /* Recex.xcdatamodeld in Sources */,
+				79578013256C4C6100D1B2AC /* ContentView.swift in Sources */,
+				79578011256C4C6100D1B2AC /* RecexApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7957801F256C4C6300D1B2AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79578028256C4C6300D1B2AC /* RecexTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7957802A256C4C6300D1B2AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79578033256C4C6300D1B2AC /* RecexUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		79578025256C4C6300D1B2AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7957800C256C4C6100D1B2AC /* Recex */;
+			targetProxy = 79578024256C4C6300D1B2AC /* PBXContainerItemProxy */;
+		};
+		79578030256C4C6300D1B2AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7957800C256C4C6100D1B2AC /* Recex */;
+			targetProxy = 7957802F256C4C6300D1B2AC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		79578035256C4C6300D1B2AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		79578036256C4C6300D1B2AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		79578038256C4C6300D1B2AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Recex/Preview Content\"";
+				DEVELOPMENT_TEAM = M43AJA544H;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Recex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.DespicableMonkey.Recex;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		79578039256C4C6300D1B2AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Recex/Preview Content\"";
+				DEVELOPMENT_TEAM = M43AJA544H;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Recex/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.DespicableMonkey.Recex;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7957803B256C4C6300D1B2AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M43AJA544H;
+				INFOPLIST_FILE = RecexTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.DespicableMonkey.RecexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recex.app/Recex";
+			};
+			name = Debug;
+		};
+		7957803C256C4C6300D1B2AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M43AJA544H;
+				INFOPLIST_FILE = RecexTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.DespicableMonkey.RecexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recex.app/Recex";
+			};
+			name = Release;
+		};
+		7957803E256C4C6300D1B2AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M43AJA544H;
+				INFOPLIST_FILE = RecexUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.DespicableMonkey.RecexUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Recex;
+			};
+			name = Debug;
+		};
+		7957803F256C4C6300D1B2AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M43AJA544H;
+				INFOPLIST_FILE = RecexUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.DespicableMonkey.RecexUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Recex;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		79578008256C4C6100D1B2AC /* Build configuration list for PBXProject "Recex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79578035256C4C6300D1B2AC /* Debug */,
+				79578036256C4C6300D1B2AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79578037256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "Recex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79578038256C4C6300D1B2AC /* Debug */,
+				79578039256C4C6300D1B2AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7957803A256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "RecexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7957803B256C4C6300D1B2AC /* Debug */,
+				7957803C256C4C6300D1B2AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7957803D256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "RecexUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7957803E256C4C6300D1B2AC /* Debug */,
+				7957803F256C4C6300D1B2AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7957801B256C4C6300D1B2AC /* Recex.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7957801C256C4C6300D1B2AC /* Recex.xcdatamodel */,
+			);
+			currentVersion = 7957801C256C4C6300D1B2AC /* Recex.xcdatamodel */;
+			path = Recex.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 79578005256C4C6100D1B2AC /* Project object */;
+}
