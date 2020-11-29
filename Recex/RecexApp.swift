@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PromiseKit
 
 @main
 struct RecexApp: App {

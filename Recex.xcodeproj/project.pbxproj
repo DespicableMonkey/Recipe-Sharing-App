@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D82BFA5708911F92E03C9D0 /* Pods_Recex_RecexUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A0E0038E536D71BFB2557D /* Pods_Recex_RecexUITests.framework */; };
+		63CB74D785F8BF78D98394C8 /* Pods_Recex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FF7C356707B9E078E39598 /* Pods_Recex.framework */; };
 		79578011256C4C6100D1B2AC /* RecexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578010256C4C6100D1B2AC /* RecexApp.swift */; };
 		79578013256C4C6100D1B2AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578012256C4C6100D1B2AC /* ContentView.swift */; };
 		79578015256C4C6300D1B2AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79578014256C4C6300D1B2AC /* Assets.xcassets */; };
@@ -15,6 +17,37 @@
 		7957801D256C4C6300D1B2AC /* Recex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7957801B256C4C6300D1B2AC /* Recex.xcdatamodeld */; };
 		79578028256C4C6300D1B2AC /* RecexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578027256C4C6300D1B2AC /* RecexTests.swift */; };
 		79578033256C4C6300D1B2AC /* RecexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79578032256C4C6300D1B2AC /* RecexUITests.swift */; };
+		79CB107D256EE7F000CC5DAE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB107C256EE7F000CC5DAE /* LoginView.swift */; };
+		79CB1085256EE86100CC5DAE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1084256EE86100CC5DAE /* SignUpView.swift */; };
+		79CB108A256EE97A00CC5DAE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1089256EE97A00CC5DAE /* LoginViewModel.swift */; };
+		79CB108F256EE9A300CC5DAE /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB108E256EE9A300CC5DAE /* Database.swift */; };
+		79CB1096256EEA0D00CC5DAE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1095256EEA0D00CC5DAE /* Enums.swift */; };
+		79CB109E256EEA3400CC5DAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB109D256EEA3400CC5DAE /* Color.swift */; };
+		79CB10A3256EEA4800CC5DAE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10A2256EEA4800CC5DAE /* String.swift */; };
+		79CB10A8256EEA6D00CC5DAE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10A7256EEA6D00CC5DAE /* Data.swift */; };
+		79CB10B1256EEAC900CC5DAE /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10B0256EEAC900CC5DAE /* HTTPResponse.swift */; };
+		79CB10B6256EEAE300CC5DAE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10B5256EEAE300CC5DAE /* Request.swift */; };
+		79CB10BB256EEB4500CC5DAE /* BasicHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10BA256EEB4500CC5DAE /* BasicHTTPResponse.swift */; };
+		79CB10C0256EEB6B00CC5DAE /* EmailHashHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10BF256EEB6B00CC5DAE /* EmailHashHTTPResponse.swift */; };
+		79CB10C9256EEBAF00CC5DAE /* SignUpJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10C8256EEBAF00CC5DAE /* SignUpJSONModel.swift */; };
+		79CB10CF256EEBCE00CC5DAE /* loginEmailVerificationAndSaltRetrievalJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10CE256EEBCE00CC5DAE /* loginEmailVerificationAndSaltRetrievalJSONModel.swift */; };
+		79CB10D7256EEBE300CC5DAE /* loginPasswordVerificationJSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10D6256EEBE300CC5DAE /* loginPasswordVerificationJSONModel.swift */; };
+		79CB10DC256EEC3000CC5DAE /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10DB256EEC3000CC5DAE /* Query.swift */; };
+		79CB10E1256EECE200CC5DAE /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10E0256EECE200CC5DAE /* AccountModel.swift */; };
+		79CB10EA256EFC5700CC5DAE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10E9256EFC5700CC5DAE /* LoadingView.swift */; };
+		79CB10EF256F86BA00CC5DAE /* Hasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10EE256F86BA00CC5DAE /* Hasher.swift */; };
+		79CB10F4256F922D00CC5DAE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB10F3256F922D00CC5DAE /* Errors.swift */; };
+		79CB113D2571936400CC5DAE /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB113C2571936400CC5DAE /* NavigationView.swift */; };
+		79CB1145257193D800CC5DAE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1144257193D800CC5DAE /* HomeView.swift */; };
+		79CB114A257193E300CC5DAE /* PantryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1149257193E300CC5DAE /* PantryView.swift */; };
+		79CB1157257213D200CC5DAE /* InviteFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1156257213D200CC5DAE /* InviteFriends.swift */; };
+		79CB116125721FE100CC5DAE /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB116025721FE100CC5DAE /* Person.swift */; };
+		79CB116E2572226100CC5DAE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB116D2572226100CC5DAE /* User.swift */; };
+		79CB11732572228F00CC5DAE /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB11722572228F00CC5DAE /* Individual.swift */; };
+		79CB117B25722CC900CC5DAE /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB117A25722CC900CC5DAE /* QRGenerator.swift */; };
+		79CB118025722F0F00CC5DAE /* InviteFriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB117F25722F0F00CC5DAE /* InviteFriendsViewModel.swift */; };
+		79CB11D525732F1900CC5DAE /* Determinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB11D425732F1300CC5DAE /* Determinator.swift */; };
+		9F6E47966880646EE429918E /* Pods_RecexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C00C0DFDBB0FFB9845CB4E /* Pods_RecexTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +68,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F957127EF12468C9787AD7A /* Pods-RecexTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecexTests.release.xcconfig"; path = "Target Support Files/Pods-RecexTests/Pods-RecexTests.release.xcconfig"; sourceTree = "<group>"; };
+		1C7BFAB7358B129DD59AE664 /* Pods-RecexTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecexTests.debug.xcconfig"; path = "Target Support Files/Pods-RecexTests/Pods-RecexTests.debug.xcconfig"; sourceTree = "<group>"; };
+		278F11210BBC27F98C739073 /* Pods-Recex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recex.debug.xcconfig"; path = "Target Support Files/Pods-Recex/Pods-Recex.debug.xcconfig"; sourceTree = "<group>"; };
 		7957800D256C4C6100D1B2AC /* Recex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79578010256C4C6100D1B2AC /* RecexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecexApp.swift; sourceTree = "<group>"; };
 		79578012256C4C6100D1B2AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,6 +85,42 @@
 		7957802E256C4C6300D1B2AC /* RecexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79578032256C4C6300D1B2AC /* RecexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecexUITests.swift; sourceTree = "<group>"; };
 		79578034256C4C6300D1B2AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79CB107C256EE7F000CC5DAE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		79CB1084256EE86100CC5DAE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		79CB1089256EE97A00CC5DAE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		79CB108E256EE9A300CC5DAE /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		79CB1095256EEA0D00CC5DAE /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		79CB109D256EEA3400CC5DAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		79CB10A2256EEA4800CC5DAE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		79CB10A7256EEA6D00CC5DAE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		79CB10B0256EEAC900CC5DAE /* HTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		79CB10B5256EEAE300CC5DAE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		79CB10BA256EEB4500CC5DAE /* BasicHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicHTTPResponse.swift; sourceTree = "<group>"; };
+		79CB10BF256EEB6B00CC5DAE /* EmailHashHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHashHTTPResponse.swift; sourceTree = "<group>"; };
+		79CB10C8256EEBAF00CC5DAE /* SignUpJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpJSONModel.swift; sourceTree = "<group>"; };
+		79CB10CE256EEBCE00CC5DAE /* loginEmailVerificationAndSaltRetrievalJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginEmailVerificationAndSaltRetrievalJSONModel.swift; sourceTree = "<group>"; };
+		79CB10D6256EEBE300CC5DAE /* loginPasswordVerificationJSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginPasswordVerificationJSONModel.swift; sourceTree = "<group>"; };
+		79CB10DB256EEC3000CC5DAE /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		79CB10E0256EECE200CC5DAE /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		79CB10E9256EFC5700CC5DAE /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		79CB10EE256F86BA00CC5DAE /* Hasher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hasher.swift; sourceTree = "<group>"; };
+		79CB10F3256F922D00CC5DAE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		79CB113C2571936400CC5DAE /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		79CB1144257193D800CC5DAE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		79CB1149257193E300CC5DAE /* PantryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryView.swift; sourceTree = "<group>"; };
+		79CB1156257213D200CC5DAE /* InviteFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriends.swift; sourceTree = "<group>"; };
+		79CB116025721FE100CC5DAE /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		79CB116D2572226100CC5DAE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		79CB11722572228F00CC5DAE /* Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
+		79CB117A25722CC900CC5DAE /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
+		79CB117F25722F0F00CC5DAE /* InviteFriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewModel.swift; sourceTree = "<group>"; };
+		79CB11D425732F1300CC5DAE /* Determinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Determinator.swift; sourceTree = "<group>"; };
+		89C00C0DFDBB0FFB9845CB4E /* Pods_RecexTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecexTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99BC016A7222508807A5F2C1 /* Pods-Recex-RecexUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recex-RecexUITests.release.xcconfig"; path = "Target Support Files/Pods-Recex-RecexUITests/Pods-Recex-RecexUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A5A0E0038E536D71BFB2557D /* Pods_Recex_RecexUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recex_RecexUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5D2537CD954CA2D9E512B9E /* Pods-Recex-RecexUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recex-RecexUITests.debug.xcconfig"; path = "Target Support Files/Pods-Recex-RecexUITests/Pods-Recex-RecexUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D12F237B17B80D777464B554 /* Pods-Recex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recex.release.xcconfig"; path = "Target Support Files/Pods-Recex/Pods-Recex.release.xcconfig"; sourceTree = "<group>"; };
+		E1FF7C356707B9E078E39598 /* Pods_Recex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CB74D785F8BF78D98394C8 /* Pods_Recex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F6E47966880646EE429918E /* Pods_RecexTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D82BFA5708911F92E03C9D0 /* Pods_Recex_RecexUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +158,8 @@
 				79578026256C4C6300D1B2AC /* RecexTests */,
 				79578031256C4C6300D1B2AC /* RecexUITests */,
 				7957800E256C4C6100D1B2AC /* Products */,
+				B59C6654FCC213527B9BAD95 /* Pods */,
+				B6603A38468FBC14D5FB0313 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,12 +176,18 @@
 		7957800F256C4C6100D1B2AC /* Recex */ = {
 			isa = PBXGroup;
 			children = (
+				79CB10E5256EEF0A00CC5DAE /* SupportingFiles */,
+				79CB1078256EE63600CC5DAE /* Helper */,
+				79CB1077256EE60800CC5DAE /* Global Extensions */,
+				79CB1076256EE5F700CC5DAE /* Utility */,
+				79CB1075256EE5D300CC5DAE /* MVVM */,
+				79CB1074256EE5C700CC5DAE /* Constant */,
+				79CB1073256EE5BF00CC5DAE /* Resources */,
 				79578010256C4C6100D1B2AC /* RecexApp.swift */,
 				79578012256C4C6100D1B2AC /* ContentView.swift */,
 				79578014256C4C6300D1B2AC /* Assets.xcassets */,
 				79578019256C4C6300D1B2AC /* Persistence.swift */,
 				7957801E256C4C6300D1B2AC /* Info.plist */,
-				7957801B256C4C6300D1B2AC /* Recex.xcdatamodeld */,
 				79578016256C4C6300D1B2AC /* Preview Content */,
 			);
 			path = Recex;
@@ -136,6 +219,189 @@
 			path = RecexUITests;
 			sourceTree = "<group>";
 		};
+		79CB1073256EE5BF00CC5DAE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79CB1095256EEA0D00CC5DAE /* Enums.swift */,
+				79CB10F3256F922D00CC5DAE /* Errors.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		79CB1074256EE5C700CC5DAE /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		79CB1075256EE5D300CC5DAE /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				79CB107B256EE6E600CC5DAE /* ViewModel */,
+				79CB107A256EE6DF00CC5DAE /* Model */,
+				79CB1079256EE6D900CC5DAE /* View */,
+			);
+			path = MVVM;
+			sourceTree = "<group>";
+		};
+		79CB1076256EE5F700CC5DAE /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				79CB10AC256EEA9800CC5DAE /* HTTP */,
+				79CB108E256EE9A300CC5DAE /* Database.swift */,
+				79CB10DB256EEC3000CC5DAE /* Query.swift */,
+				79CB10E9256EFC5700CC5DAE /* LoadingView.swift */,
+				79CB10EE256F86BA00CC5DAE /* Hasher.swift */,
+				79CB117A25722CC900CC5DAE /* QRGenerator.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		79CB1077256EE60800CC5DAE /* Global Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				79CB109D256EEA3400CC5DAE /* Color.swift */,
+				79CB10A2256EEA4800CC5DAE /* String.swift */,
+				79CB10A7256EEA6D00CC5DAE /* Data.swift */,
+			);
+			path = "Global Extensions";
+			sourceTree = "<group>";
+		};
+		79CB1078256EE63600CC5DAE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		79CB1079256EE6D900CC5DAE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79CB107C256EE7F000CC5DAE /* LoginView.swift */,
+				79CB11D425732F1300CC5DAE /* Determinator.swift */,
+				79CB1084256EE86100CC5DAE /* SignUpView.swift */,
+				79CB1156257213D200CC5DAE /* InviteFriends.swift */,
+				79CB113C2571936400CC5DAE /* NavigationView.swift */,
+				79CB1144257193D800CC5DAE /* HomeView.swift */,
+				79CB1149257193E300CC5DAE /* PantryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		79CB107A256EE6DF00CC5DAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79CB116A2572223600CC5DAE /* Users */,
+				79CB10E0256EECE200CC5DAE /* AccountModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		79CB107B256EE6E600CC5DAE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79CB1089256EE97A00CC5DAE /* LoginViewModel.swift */,
+				79CB117F25722F0F00CC5DAE /* InviteFriendsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		79CB10AC256EEA9800CC5DAE /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				79CB10AF256EEAB400CC5DAE /* Protcols */,
+				79CB10AE256EEAA500CC5DAE /* Requests */,
+				79CB10AD256EEA9D00CC5DAE /* Responses */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		79CB10AD256EEA9D00CC5DAE /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				79CB10BA256EEB4500CC5DAE /* BasicHTTPResponse.swift */,
+				79CB10BF256EEB6B00CC5DAE /* EmailHashHTTPResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		79CB10AE256EEAA500CC5DAE /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				79CB10C8256EEBAF00CC5DAE /* SignUpJSONModel.swift */,
+				79CB10CE256EEBCE00CC5DAE /* loginEmailVerificationAndSaltRetrievalJSONModel.swift */,
+				79CB10D6256EEBE300CC5DAE /* loginPasswordVerificationJSONModel.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		79CB10AF256EEAB400CC5DAE /* Protcols */ = {
+			isa = PBXGroup;
+			children = (
+				79CB10B0256EEAC900CC5DAE /* HTTPResponse.swift */,
+				79CB10B5256EEAE300CC5DAE /* Request.swift */,
+			);
+			path = Protcols;
+			sourceTree = "<group>";
+		};
+		79CB10E5256EEF0A00CC5DAE /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7957801B256C4C6300D1B2AC /* Recex.xcdatamodeld */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		79CB1166257221CF00CC5DAE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				79CB116025721FE100CC5DAE /* Person.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		79CB116A2572223600CC5DAE /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				79CB116B2572224B00CC5DAE /* Structure */,
+				79CB1166257221CF00CC5DAE /* Protocols */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		79CB116B2572224B00CC5DAE /* Structure */ = {
+			isa = PBXGroup;
+			children = (
+				79CB116D2572226100CC5DAE /* User.swift */,
+				79CB11722572228F00CC5DAE /* Individual.swift */,
+			);
+			path = Structure;
+			sourceTree = "<group>";
+		};
+		B59C6654FCC213527B9BAD95 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				278F11210BBC27F98C739073 /* Pods-Recex.debug.xcconfig */,
+				D12F237B17B80D777464B554 /* Pods-Recex.release.xcconfig */,
+				C5D2537CD954CA2D9E512B9E /* Pods-Recex-RecexUITests.debug.xcconfig */,
+				99BC016A7222508807A5F2C1 /* Pods-Recex-RecexUITests.release.xcconfig */,
+				1C7BFAB7358B129DD59AE664 /* Pods-RecexTests.debug.xcconfig */,
+				0F957127EF12468C9787AD7A /* Pods-RecexTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B6603A38468FBC14D5FB0313 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1FF7C356707B9E078E39598 /* Pods_Recex.framework */,
+				A5A0E0038E536D71BFB2557D /* Pods_Recex_RecexUITests.framework */,
+				89C00C0DFDBB0FFB9845CB4E /* Pods_RecexTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +409,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79578037256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "Recex" */;
 			buildPhases = (
+				4779C02E4B92414F7148F18C /* [CP] Check Pods Manifest.lock */,
 				79578009256C4C6100D1B2AC /* Sources */,
 				7957800A256C4C6100D1B2AC /* Frameworks */,
 				7957800B256C4C6100D1B2AC /* Resources */,
+				89132D07C1963C9AEC5DE154 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +428,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7957803A256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "RecexTests" */;
 			buildPhases = (
+				65284F37FF36DADA8E28A8EC /* [CP] Check Pods Manifest.lock */,
 				7957801F256C4C6300D1B2AC /* Sources */,
 				79578020256C4C6300D1B2AC /* Frameworks */,
 				79578021256C4C6300D1B2AC /* Resources */,
@@ -178,9 +447,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7957803D256C4C6300D1B2AC /* Build configuration list for PBXNativeTarget "RecexUITests" */;
 			buildPhases = (
+				98935E3E23B3D20DDEE384FA /* [CP] Check Pods Manifest.lock */,
 				7957802A256C4C6300D1B2AC /* Sources */,
 				7957802B256C4C6300D1B2AC /* Frameworks */,
 				7957802C256C4C6300D1B2AC /* Resources */,
+				7C6934267297E526FFFE4435 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,15 +531,148 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4779C02E4B92414F7148F18C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Recex-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65284F37FF36DADA8E28A8EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RecexTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C6934267297E526FFFE4435 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Recex-RecexUITests/Pods-Recex-RecexUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Recex-RecexUITests/Pods-Recex-RecexUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recex-RecexUITests/Pods-Recex-RecexUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89132D07C1963C9AEC5DE154 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Recex/Pods-Recex-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Recex/Pods-Recex-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recex/Pods-Recex-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98935E3E23B3D20DDEE384FA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Recex-RecexUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		79578009256C4C6100D1B2AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79CB116125721FE100CC5DAE /* Person.swift in Sources */,
+				79CB1157257213D200CC5DAE /* InviteFriends.swift in Sources */,
+				79CB10DC256EEC3000CC5DAE /* Query.swift in Sources */,
+				79CB118025722F0F00CC5DAE /* InviteFriendsViewModel.swift in Sources */,
+				79CB10EF256F86BA00CC5DAE /* Hasher.swift in Sources */,
+				79CB116E2572226100CC5DAE /* User.swift in Sources */,
 				7957801A256C4C6300D1B2AC /* Persistence.swift in Sources */,
+				79CB10C0256EEB6B00CC5DAE /* EmailHashHTTPResponse.swift in Sources */,
+				79CB10F4256F922D00CC5DAE /* Errors.swift in Sources */,
+				79CB10EA256EFC5700CC5DAE /* LoadingView.swift in Sources */,
+				79CB10D7256EEBE300CC5DAE /* loginPasswordVerificationJSONModel.swift in Sources */,
+				79CB11D525732F1900CC5DAE /* Determinator.swift in Sources */,
+				79CB10A3256EEA4800CC5DAE /* String.swift in Sources */,
 				7957801D256C4C6300D1B2AC /* Recex.xcdatamodeld in Sources */,
+				79CB10CF256EEBCE00CC5DAE /* loginEmailVerificationAndSaltRetrievalJSONModel.swift in Sources */,
 				79578013256C4C6100D1B2AC /* ContentView.swift in Sources */,
+				79CB109E256EEA3400CC5DAE /* Color.swift in Sources */,
+				79CB107D256EE7F000CC5DAE /* LoginView.swift in Sources */,
+				79CB1085256EE86100CC5DAE /* SignUpView.swift in Sources */,
+				79CB10BB256EEB4500CC5DAE /* BasicHTTPResponse.swift in Sources */,
+				79CB114A257193E300CC5DAE /* PantryView.swift in Sources */,
+				79CB11732572228F00CC5DAE /* Individual.swift in Sources */,
+				79CB1145257193D800CC5DAE /* HomeView.swift in Sources */,
+				79CB10A8256EEA6D00CC5DAE /* Data.swift in Sources */,
+				79CB117B25722CC900CC5DAE /* QRGenerator.swift in Sources */,
 				79578011256C4C6100D1B2AC /* RecexApp.swift in Sources */,
+				79CB108F256EE9A300CC5DAE /* Database.swift in Sources */,
+				79CB10C9256EEBAF00CC5DAE /* SignUpJSONModel.swift in Sources */,
+				79CB10E1256EECE200CC5DAE /* AccountModel.swift in Sources */,
+				79CB1096256EEA0D00CC5DAE /* Enums.swift in Sources */,
+				79CB113D2571936400CC5DAE /* NavigationView.swift in Sources */,
+				79CB10B6256EEAE300CC5DAE /* Request.swift in Sources */,
+				79CB10B1256EEAC900CC5DAE /* HTTPResponse.swift in Sources */,
+				79CB108A256EE97A00CC5DAE /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +826,7 @@
 		};
 		79578038256C4C6300D1B2AC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 278F11210BBC27F98C739073 /* Pods-Recex.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -444,6 +849,7 @@
 		};
 		79578039256C4C6300D1B2AC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D12F237B17B80D777464B554 /* Pods-Recex.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -466,6 +872,7 @@
 		};
 		7957803B256C4C6300D1B2AC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C7BFAB7358B129DD59AE664 /* Pods-RecexTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -488,6 +895,7 @@
 		};
 		7957803C256C4C6300D1B2AC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F957127EF12468C9787AD7A /* Pods-RecexTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -510,6 +918,7 @@
 		};
 		7957803E256C4C6300D1B2AC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D2537CD954CA2D9E512B9E /* Pods-Recex-RecexUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -530,6 +939,7 @@
 		};
 		7957803F256C4C6300D1B2AC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99BC016A7222508807A5F2C1 /* Pods-Recex-RecexUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
