@@ -16,7 +16,9 @@ struct Database {
         "authenticationURL" : "http://recex.applications.pulkith.com/account/mobile/services/authentication",
         "selectDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/select",
         "updateDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/update",
-        "insertDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/insert"
+        "insertDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/insert",
+        
+        "public_api-ingredientsURL" : "http://recex.applications.pulkith.com/mobile/public_api/resouces?request=ingredients-master"
                     ]
     var Account : AccountModel
     

@@ -47,6 +47,7 @@
 		79CB117B25722CC900CC5DAE /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB117A25722CC900CC5DAE /* QRGenerator.swift */; };
 		79CB118025722F0F00CC5DAE /* InviteFriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB117F25722F0F00CC5DAE /* InviteFriendsViewModel.swift */; };
 		79CB11D525732F1900CC5DAE /* Determinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB11D425732F1300CC5DAE /* Determinator.swift */; };
+		79CB11DA2573454B00CC5DAE /* BindingBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB11D92573454B00CC5DAE /* BindingBool.swift */; };
 		9F6E47966880646EE429918E /* Pods_RecexTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C00C0DFDBB0FFB9845CB4E /* Pods_RecexTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		79CB117A25722CC900CC5DAE /* QRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		79CB117F25722F0F00CC5DAE /* InviteFriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewModel.swift; sourceTree = "<group>"; };
 		79CB11D425732F1300CC5DAE /* Determinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Determinator.swift; sourceTree = "<group>"; };
+		79CB11D92573454B00CC5DAE /* BindingBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingBool.swift; sourceTree = "<group>"; };
 		89C00C0DFDBB0FFB9845CB4E /* Pods_RecexTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecexTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BC016A7222508807A5F2C1 /* Pods-Recex-RecexUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recex-RecexUITests.release.xcconfig"; path = "Target Support Files/Pods-Recex-RecexUITests/Pods-Recex-RecexUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A5A0E0038E536D71BFB2557D /* Pods_Recex_RecexUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recex_RecexUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 				79CB109D256EEA3400CC5DAE /* Color.swift */,
 				79CB10A2256EEA4800CC5DAE /* String.swift */,
 				79CB10A7256EEA6D00CC5DAE /* Data.swift */,
+				79CB11D92573454B00CC5DAE /* BindingBool.swift */,
 			);
 			path = "Global Extensions";
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				79CB118025722F0F00CC5DAE /* InviteFriendsViewModel.swift in Sources */,
 				79CB10EF256F86BA00CC5DAE /* Hasher.swift in Sources */,
 				79CB116E2572226100CC5DAE /* User.swift in Sources */,
+				79CB11DA2573454B00CC5DAE /* BindingBool.swift in Sources */,
 				7957801A256C4C6300D1B2AC /* Persistence.swift in Sources */,
 				79CB10C0256EEB6B00CC5DAE /* EmailHashHTTPResponse.swift in Sources */,
 				79CB10F4256F922D00CC5DAE /* Errors.swift in Sources */,

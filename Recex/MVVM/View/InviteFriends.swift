@@ -9,8 +9,7 @@ import SwiftUI
 import MobileCoreServices
 
 struct InviteFriends: View {
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+    @Environment(\.presentationMode) var presentationmode
     @StateObject var model = InviteFriendsViewModel(user: User(PersonID: "000000", Firstname: "Pulkith", Lastname: "Paruchuri", Email: "email@example.com", Creation: "Dec 6, 2020", Role: "Developer", SuggestionModelData: "null", Posts: ["null"], Followers: ["null"], Following: ["null"], ShareIdentifier: "nA4Se3", PantryList: ["null"], Preferences: ["null"], Communities: [["null"]]))
     
     var body: some View {
@@ -22,8 +21,7 @@ struct InviteFriends: View {
                         .frame(width: 40, height:40)
                         .padding(.trailing, 20)
                         .onTapGesture(count: 1){
-                            print(self.mode.wrappedValue)
-                            self.mode.wrappedValue.dismiss()
+                            self.presentationmode.wrappedValue.dismiss()
                         }
                     
                     Text("Invite Friends")
