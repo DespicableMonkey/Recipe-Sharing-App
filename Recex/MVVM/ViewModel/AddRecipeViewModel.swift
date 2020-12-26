@@ -21,6 +21,7 @@ class AddRecipeViewModel : ObservableObject{
     @Published var stepTFHeights  : [CGFloat] = [0]
     
     @Published var stepImages  : [UIImage?] = [nil]
+    @Published var stepImagePresents : [Bool] = [false]
     
     var disabledPublish : Bool = true
 }

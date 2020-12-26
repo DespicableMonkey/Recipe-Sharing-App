@@ -12,7 +12,6 @@ import SwiftUI
 struct CreateRecipeView: View {
     @StateObject var model = AddRecipeViewModel()
     
-    @State var isShowingImagePicker = false
     
     
     var body: some View {
@@ -153,11 +152,11 @@ struct CreateRecipeView: View {
                                             //.renderingMode(.original)
                                             .scaledToFit()
                                             .frame(width: 150, height: 150)
-                                            .sheet(isPresented: $isShowingImagePicker, content: {
-                                                ImagePickerView(isPresented: self.$isShowingImagePicker, image: $model.stepImages[index])
+                                            .sheet(isPresented: $model.stepImagePresents[index], content: {
+                                                ImagePickerView(isPresented: $model.stepImagePresents[index], image: $model.stepImages[index])
                                             })
                                             .onTapGesture {
-                                                self.isShowingImagePicker.toggle()
+                                                model.stepImagePresents[index].toggle()
                                             }
                                         
                                         Image(systemName: "trash")
@@ -182,11 +181,11 @@ struct CreateRecipeView: View {
                                         }
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(15)
-                                        .sheet(isPresented: $isShowingImagePicker, content: {
-                                            ImagePickerView(isPresented: self.$isShowingImagePicker, image: $model.stepImages[index])
+                                        .sheet(isPresented: $model.stepImagePresents[index], content: {
+                                            ImagePickerView(isPresented: $model.stepImagePresents[index], image: $model.stepImages[index])
                                         })
                                         .onTapGesture {
-                                            self.isShowingImagePicker.toggle()
+                                            model.stepImagePresents[index].toggle()
                                         }
                                     }
                                     
@@ -201,6 +200,7 @@ struct CreateRecipeView: View {
                             model.steps.append("")
                             model.stepTFHeights.append(0)
                             model.stepImages.append(nil)
+                            model.stepImagePresents.append(nil)
                         }, label: {
                             HStack (alignment: .center){
                                 Image(systemName: "plus")
