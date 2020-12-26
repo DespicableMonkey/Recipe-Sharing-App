@@ -21,12 +21,19 @@ var tabItemIcons : [Image] = [Image("HomeIcon"), Image("SearchIcon"), Image("Com
 var tabItems = ["Home", "Explore", "Community", "Pantry", "Profile"]
 
 struct NavigationController: View {
+    
+    @ObservedObject var user: User = .shared
+    
     @State var dark = false
     @State var show = false
     @State var selected = "Home"
     @State var hold = true
     
+    @State var PresentNewRecipe = false
+    
+    
     init(){
+//        User(PersonID: "000000", Firstname: "Pulkith", Lastname: "Paruchuri", Email: "email@example.com", Creation: "Dec 6, 2020", Role: "Developer", SuggestionModelData: "null", Posts: [], Followers: [], Following: [], ShareIdentifier: "nA4Se3", PantryList: [], Preferences: [:], Communities: [])
         UITabBar.appearance().isHidden = true
     }
     //                .onTapGesture {
@@ -111,6 +118,24 @@ struct NavigationController: View {
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(Color("ColorThemeMain"))
                         
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                
+                            }) {
+                                Image(systemName: "plus.square")
+                                    .resizable()
+                                    .frame(width:25, height: 25)
+                                    .sheet(isPresented: self.$PresentNewRecipe){
+                                        CreateRecipeView()
+                                    }
+                                    .onTapGesture {
+                                        self.PresentNewRecipe.toggle()
+                                    }
+                            }
+                           
+                        }
+                        
                     }
                     .padding()
                     .foregroundColor(.primary)
@@ -122,6 +147,7 @@ struct NavigationController: View {
                     
                 }
             }
+            .padding(.top)
             HStack {
                 Menu(dark: self.$dark, show: self.$show)
                     .preferredColorScheme(self.dark ? .dark : .light)

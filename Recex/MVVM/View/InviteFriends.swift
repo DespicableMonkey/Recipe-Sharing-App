@@ -10,7 +10,11 @@ import MobileCoreServices
 
 struct InviteFriends: View {
     @Environment(\.presentationMode) var presentationmode
-    @StateObject var model = InviteFriendsViewModel(user: User(PersonID: "000000", Firstname: "Pulkith", Lastname: "Paruchuri", Email: "email@example.com", Creation: "Dec 6, 2020", Role: "Developer", SuggestionModelData: "null", Posts: ["null"], Followers: ["null"], Following: ["null"], ShareIdentifier: "nA4Se3", PantryList: ["null"], Preferences: ["null"], Communities: [["null"]]))
+    
+    @ObservedObject var user: User = .shared
+    
+    
+    @StateObject var model = InviteFriendsViewModel()
     
     var body: some View {
             VStack{

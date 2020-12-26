@@ -9,17 +9,19 @@ import Foundation
 import SwiftUI
 
 class InviteFriendsViewModel : ObservableObject{
-    let User : User
+    @ObservedObject var user: User = .shared
     
-    @Published var ShareableLink : String
+    @Published var ShareableLink : String = ""
     @Published var QRImage : UIImage? = nil
     @Published var copied = false
     
-    init(user : User){
-        self.User = user
-        self.ShareableLink = "http://recex.applications.pulkith.com/mobile/invite?uid_share=\(User.ShareIdentifier)&request=mobile&type=QR&response=none"
+    init(){
+        ShareableLink = generateShareableLink(uid_share: user.ShareIdentifier)
+        print(ShareableLink)
         let _ = generateFriendURL()
     }
+    
+    func generateShareableLink(uid_share : String ) -> String { return "http://recex.applications.pulkith.com/mobile/invite?uid_share=\(uid_share)&request=mobile&type=QR&response=none" }
     
     func generateFriendURL() {
     let result = QRGenerator(data: ShareableLink).Generate()

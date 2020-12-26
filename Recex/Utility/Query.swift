@@ -62,6 +62,11 @@ struct Query {
                         } else if( responseFormat == .passwordValidation) {
                             guard let request = basicRequest(data: data) else { throw RuntimeError("The Server Failed to Respond") }
                             seal.fulfill(request)
+                        } else if (responseFormat == .ingredients){
+                            guard let request = IngredientsRequest(data: data) else { throw
+                                RuntimeError("Failed To Fetch Ingredients")
+                            }
+                            seal.fulfill(request)
                         }
                     } catch let error as RuntimeError {
                         //Error Found That We Threw. Reject the Promise with the given error
@@ -94,4 +99,10 @@ struct Query {
         return response
     }
 
+    func IngredientsRequest(data: Data) -> IngredientsHTTPResponse? {
+        guard let response = try? JSONDecoder().decode(IngredientsHTTPResponse.self, from: data) else {
+            return nil
+        }
+        return response
+    }
 }

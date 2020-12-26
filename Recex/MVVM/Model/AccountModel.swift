@@ -11,15 +11,8 @@ import PromiseKit
 struct AccountModel {
     let query = Query()
     var URLs : [String: String]
-    let requests : [responseFormats: String]
     init(urls : [String: String]){
         URLs = urls
-        requests = [
-            .basic : "",
-            .emailHash: "email_to_salt",
-            .passwordValidation: "password_validation",
-            .signUp: "sign_up"
-        ]
     }
     func validateLogin(email: String, password: String, completion: @escaping(validationResponses,  _ error: Error?) -> (Void)) -> validationResponses? {
         let emailRequestJSON = loginEmailVerificationAndSaltRetrievalJSONModel(authentication_key: "-", request: requests[.emailHash] ?? "", email: email)
