@@ -16,4 +16,12 @@ extension String {
     }
     var length: Int { return self.count }
     
+    func limit(limit: Int) -> String {
+        if(self.count > limit) {
+            return String(self.prefix(limit))
+        }
+        else {
+            return self
+        }
+    }
 }

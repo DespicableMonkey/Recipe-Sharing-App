@@ -28,9 +28,10 @@ struct AccountModel {
             let passwordRequestJSONData = try! JSONEncoder().encode(passwordRequestJSON)
             return passwordRequestJSONData
         }.then { (JSONData : Data) in
-             query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: JSONData, responseFormat: .passwordValidation)
+             query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: JSONData, responseFormat: .withInfo)
         }.done { (response : HTTPResponse) in
-            guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Could Not Get A Response") }
+            guard let convertedResponse = (response as? ResponseWithInfoHTTPResponse) else { throw RuntimeError("Could Not Get A Response") }
+            user_cons.PersonID = convertedResponse.info
             let verdict : validationResponses = convertedResponse.result == "Valid" ? .success : .fail
             completion(verdict, nil)
         }.catch { (error : Error) in

@@ -34,3 +34,17 @@ struct CustomTextField_V2 : View {
         .padding(.horizontal)
     }
 }
+
+struct fullFormTF : View {
+    var placeholder : String
+    @Binding var txt : String
+    var body : some View {
+            TextField(self.placeholder, text: $txt)
+                .padding([.leading, .trailing], 5)
+                .padding([.top, .bottom], 15)
+                .background(
+                            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                .stroke(Color.gray.opacity(0.7), lineWidth: 1)
+                        ).padding()
+    }
+}

@@ -18,7 +18,11 @@ struct Database {
         "updateDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/update",
         "insertDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/insert",
         
-        "public_api-ingredientsURL" : "http://recex.applications.pulkith.com/mobile/public_api/resources?request=ingredients-master"
+        "public_api-ingredientsURL" : "http://recex.applications.pulkith.com/mobile/public_api/resources?request=ingredients-master",
+        
+        "fetchUserDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/fetch",
+        
+        "createCommunityURL" : "http://recex.applications.pulkith.com/mobile/communities/create"
                     ]
     var Account : AccountModel
     

@@ -11,7 +11,7 @@ import SwiftUI
 struct ImagePickerView : UIViewControllerRepresentable {
     
     @Binding var isPresented : Bool
-    @Binding var image : UIImage?
+    @Binding var image : UIImage
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerView>) -> UIViewController{
         let picker = UIImagePickerController()

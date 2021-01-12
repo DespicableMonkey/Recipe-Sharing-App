@@ -67,7 +67,7 @@ struct NeededIngredients: View {
                         .background(Color(#colorLiteral(red: 0.2458183467, green: 0.6090428233, blue: 1, alpha: 1)))
                         .cornerRadius(15)
                         .sheet(isPresented: self.$search
-                               , content: { IngredientSearchView(searchTxt: .constant("")) })
+                               , content: { IngredientSearchView() })
                 }
             }
         }.background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).ignoresSafeArea())

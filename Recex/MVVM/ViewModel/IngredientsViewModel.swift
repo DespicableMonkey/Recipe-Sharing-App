@@ -12,8 +12,11 @@ import SwiftUI
 class IngredientsViewModel : ObservableObject {
     @Published var ingredients : [Ingredient] = []
     @Published var searchedIngredients : [Ingredient] = []
-    @State var searchText = ""
+    @Published var searchText = ""
     @Published var alertText = "Search & Explore Our Ingredients"
+    
+    @Published var addedToNeeded : [Ingredient] = []
+    
     let db = Database()
     let query = Query()
     var URLs : [String: String]
@@ -23,6 +26,7 @@ class IngredientsViewModel : ObservableObject {
         self.fetchIngredients()
     }
     func fetchIngredients () {
+        
         let _ = queryIngredients(completion: {
              (response, error) in
             
@@ -58,7 +62,9 @@ class IngredientsViewModel : ObservableObject {
         }
         return validationResponses.none
     }
-    func searchIngredients() {
-        
+    func searchIngredients() -> [Ingredient] {
+        let arr : [Ingredient] = ingredients.filter({ searchText.isEmpty ? true : $0.name.lowercased().contains(searchText.lowercased()) })
+        let result = arr.sorted { ($0.name.hasPrefix(searchText) ? 0 : 1) < ($1.name.hasPrefix(searchText) ? 0 : 1)}
+        return result
     }
 }

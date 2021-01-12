@@ -67,6 +67,16 @@ struct Query {
                                 RuntimeError("Failed To Fetch Ingredients")
                             }
                             seal.fulfill(request)
+                        } else if (responseFormat == .withInfo) {
+                            guard let request = ResponseInfo(data: data) else {
+                                throw RuntimeError("The Server Failed To Respond")
+                            }
+                            seal.fulfill(request)
+                        } else if (responseFormat == .user) {
+                            guard let request = UserRequest(data: data) else {
+                                throw RuntimeError("The Server Failed To Respond")
+                            }
+                            seal.fulfill(request)
                         }
                     } catch let error as RuntimeError {
                         //Error Found That We Threw. Reject the Promise with the given error
@@ -101,6 +111,18 @@ struct Query {
 
     func IngredientsRequest(data: Data) -> IngredientsHTTPResponse? {
         guard let response = try? JSONDecoder().decode(IngredientsHTTPResponse.self, from: data) else {
+            return nil
+        }
+        return response
+    }
+    func ResponseInfo(data: Data) -> ResponseWithInfoHTTPResponse? {
+        guard let response = try? JSONDecoder().decode(ResponseWithInfoHTTPResponse.self, from: data) else {
+            return nil
+        }
+        return response
+    }
+    func UserRequest(data: Data) -> UserDataResponse? {
+        guard let response = try? JSONDecoder().decode(UserDataResponse.self, from: data) else {
             return nil
         }
         return response

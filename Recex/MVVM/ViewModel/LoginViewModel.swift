@@ -26,7 +26,6 @@ class ModelData : ObservableObject {
     let db = Database()
     
     init() {
-        //print(UserDefaults.standard.bool(forKey: "LoggedIn"))
     }
     
     func signUp(){
@@ -96,6 +95,7 @@ class ModelData : ObservableObject {
             else if (response == .success) {
                 let ud = UserDefaults.standard
                 ud.setValue(true, forKey: "LoggedIn")
+                ud.setValue(user_cons.PersonID, forKey: "PersonID")
                 self.loggedIn = true
                 return
             }

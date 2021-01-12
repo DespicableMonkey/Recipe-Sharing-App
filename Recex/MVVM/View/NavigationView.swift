@@ -18,7 +18,7 @@ import SwiftUI
 import SwiftUI
 
 var tabItemIcons : [Image] = [Image("HomeIcon"), Image("SearchIcon"), Image("CommunityIcon"), Image("ChefIcon"), Image("ProfileIcon")]
-var tabItems = ["Home", "Explore", "Community", "Pantry", "Profile"]
+var tabItems = ["Home", "Explore", "Communities", "Pantry", "Profile"]
 
 struct NavigationController: View {
     
@@ -33,7 +33,8 @@ struct NavigationController: View {
     
     
     init(){
-//        User(PersonID: "000000", Firstname: "Pulkith", Lastname: "Paruchuri", Email: "email@example.com", Creation: "Dec 6, 2020", Role: "Developer", SuggestionModelData: "null", Posts: [], Followers: [], Following: [], ShareIdentifier: "nA4Se3", PantryList: [], Preferences: [:], Communities: [])
+        user_cons.PersonID = UserDefaults.standard.string(forKey: "PersonID") ?? "-1"
+        user = User(PersonID: user_cons.PersonID)
         UITabBar.appearance().isHidden = true
     }
     //                .onTapGesture {
@@ -52,7 +53,7 @@ struct NavigationController: View {
                     Color.blue
                         .tag(tabItems[1])
                         .ignoresSafeArea(.all, edges: .top)
-                    Color.yellow
+                    CommunityListView()
                         .tag(tabItems[2])
                         .ignoresSafeArea(.all, edges: .top)
                     PantryView()
@@ -82,6 +83,7 @@ struct NavigationController: View {
                         if value != tabItems.last{Spacer(minLength: 0)}
                     }
                 }
+                //.offset(y: -100)
                 
                 
                 .padding(.horizontal,25)
@@ -140,13 +142,14 @@ struct NavigationController: View {
                     .padding()
                     .foregroundColor(.primary)
                     .overlay(Rectangle().stroke(Color.primary.opacity(0.1), lineWidth: 1).shadow(radius: 3).edgesIgnoringSafeArea(.top))
-                    
+                    //background(Color("ColorThemeMain"))
                     Spacer()
                     
                     Spacer()
                     
                 }
             }
+            //.offset(y: 100)
             .padding(.top)
             HStack {
                 Menu(dark: self.$dark, show: self.$show)

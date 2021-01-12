@@ -11,9 +11,7 @@ import SwiftUI
 
 struct CreateRecipeView: View {
     @StateObject var model = AddRecipeViewModel()
-    
-    
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -24,7 +22,7 @@ struct CreateRecipeView: View {
                 
                 Button(action: {}, label: {
                     Text("Publish")
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.white)
                         .padding([.top, .bottom])
                         .padding([.trailing, .leading])
                         .overlay(model.disabledPublish ? Color.gray.opacity(0.5) : Color.gray.opacity(0))
@@ -146,10 +144,9 @@ struct CreateRecipeView: View {
                                             }
                                     }
                                     
-                                    if(model.stepImages[index] != nil) {
-                                        Image(uiImage: model.stepImages[index]!)
+                                    if(model.stepImages[index] != UIImage()){
+                                        Image(uiImage: model.stepImages[index])
                                             .resizable()
-                                            //.renderingMode(.original)
                                             .scaledToFit()
                                             .frame(width: 150, height: 150)
                                             .sheet(isPresented: $model.stepImagePresents[index], content: {
@@ -160,13 +157,12 @@ struct CreateRecipeView: View {
                                             }
                                         
                                         Image(systemName: "trash")
-                                            .foregroundColor(.red)
+                                            .foregroundColor(Color.red)
                                             .onTapGesture {
-                                                model.stepImages[index] = nil
+                                                model.stepImages[index] = UIImage()
                                             }
-                                        
-                                        
-                                    } else {
+                                    }
+                                   else {
                                         VStack (spacing: 20){
                                             Image(systemName: "photo")
                                                 .resizable()
@@ -177,7 +173,7 @@ struct CreateRecipeView: View {
                                                 .font(.title2)
                                                 .fontWeight(.bold)
                                                 .padding([.bottom, .leading, .trailing])
-                                                
+
                                         }
                                         .background(Color.gray.opacity(0.1))
                                         .cornerRadius(15)
@@ -199,8 +195,8 @@ struct CreateRecipeView: View {
                         Button(action: {
                             model.steps.append("")
                             model.stepTFHeights.append(0)
-                            model.stepImages.append(nil)
-                            model.stepImagePresents.append(nil)
+                            model.stepImages.append(UIImage())
+                            model.stepImagePresents.append(false)
                         }, label: {
                             HStack (alignment: .center){
                                 Image(systemName: "plus")

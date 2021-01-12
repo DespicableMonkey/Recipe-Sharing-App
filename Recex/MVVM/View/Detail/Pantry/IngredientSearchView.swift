@@ -10,7 +10,6 @@ import SwiftUI
 struct IngredientSearchView: View {
     @Environment(\.presentationMode) var presentationmode
     
-    @Binding var searchTxt: String
     @State private var isEditing  = false
     
     @StateObject var model = IngredientsViewModel()
@@ -34,7 +33,7 @@ struct IngredientSearchView: View {
             }
             HStack {
                 
-                TextField("Search Ingredients...", text: $searchTxt)
+                TextField("Search Ingredients...", text: $model.searchText)
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
@@ -48,7 +47,7 @@ struct IngredientSearchView: View {
                             
                             if isEditing {
                                 Button(action: {
-                                    self.searchTxt = ""
+                                    model.searchText = ""
                                 }) {
                                     Image(systemName: "multiply.circle.fill")
                                         .foregroundColor(.gray)
@@ -65,7 +64,7 @@ struct IngredientSearchView: View {
                 if isEditing {
                     Button(action:{
                         self.isEditing = false
-                        self.searchTxt = ""
+                        model.searchText = ""
                     }){
                         Text("Cancel")
                     }
@@ -75,7 +74,7 @@ struct IngredientSearchView: View {
                 }
             }
             Divider()
-            if(model.searchText.count != 0){
+            if(model.searchText.count == 0){
                 VStack {
                     Text(model.alertText)
                             .multilineTextAlignment(.center)
@@ -86,16 +85,9 @@ struct IngredientSearchView: View {
             else {
             HStack {
                 VStack (spacing: 0){
-                    Text("lol")
-                    ScrollView(.vertical, showsIndicators: false){
-                       
-//                        ForEach(model.searchedIngredients){ingredient in
-//                            IngredientSearchResultView(ingredient: .constant(ingredient))
-//                        }
-//                        List(model.ingredients.filter({ model.searchText.isEmpty ? true : $0.name.contains(model.searchText) })) { ingredient in
-//                            IngredientSearchResultView(ingredient: .constant(ingredient))
-//                        }
-                    }
+                    List(model.searchIngredients()) { ingredient in
+                        IngredientSearchResultView(ingredient: .constant(ingredient), selected: .constant((true)))
+                        }
                     .padding(.top)
                 }
                 Spacer()
@@ -111,33 +103,61 @@ struct IngredientSearchView: View {
 
 struct IngredientSearchResultView : View {
      @Binding var ingredient : Ingredient
+     @Binding var selected : Bool
     
+        @State var checked =  false
+        @State var trimVal : CGFloat = 0
+        @State var width : CGFloat = 70
+        @State var removeText = false
+
+    
+    init(ingredient : Binding<Ingredient>, selected : Binding<Bool>) {
+        self._ingredient = ingredient
+        self._selected = selected
+        
+        if ( true) {
+            self.checked.toggle()
+        }
+    }
     var body : some View {
-            HStack {
-                Button(action: {}) {
-                    Circle()
-                        .overlay(
-                            Circle()
-                                .stroke(Color.gray,lineWidth: 5)
-                        ).foregroundColor(.clear)
-                        .frame(width: 17, height: 17, alignment: .center)
-                        .padding(.trailing, 10)
+        
+
+                Button(action: {
+                        if !self.checked {
+                            self.removeText.toggle()
+                            withAnimation() {
+                                self.width = 70
+                            }
+                            withAnimation(Animation.easeIn(duration: 0.3)) {
+                                self.trimVal = 1
+                                self.checked.toggle()
+                            }
+                        } else {
+                            withAnimation() {
+                                self.trimVal = 0
+                                self.width = 70
+                                self.checked.toggle()
+                                self.removeText.toggle()
+                            }
+                        }
+                }) {
+                    HStack {
+                    AnimatedCheckMarkView(checked: $checked, trimVal: $trimVal, width: $width, removeText: $removeText)
                     Text(ingredient.name)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                         .font(.system(size: 20))
+                    Spacer()
+                    }
                 }
-                Spacer()
-            }
-            .padding(.leading, 15)
+            .padding(.leading, 5)
             Divider()
                 .padding([.leading, .trailing], 10)
-        .onTapGesture {}
     }
 }
 struct IngredientSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientSearchView(searchTxt: .constant(""))
+        IngredientSearchView()
     }
 }
 

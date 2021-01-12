@@ -13,6 +13,8 @@ enum responseFormats {
     case signUp
     case fetch
     case ingredients
+    case withInfo
+    case user
 }
 
 enum validationResponses {
@@ -30,6 +32,8 @@ let requests : [responseFormats : String] = [
     .emailHash: "email_to_salt",
     .passwordValidation: "password_validation",
     .signUp: "sign_up",
-    .fetch: "fetch"
+    .fetch: "fetch",
+    .withInfo: "fetch",
+    .user: "fetch"
 ]
 
