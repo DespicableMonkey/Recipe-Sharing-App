@@ -15,6 +15,7 @@ enum responseFormats {
     case ingredients
     case withInfo
     case user
+    case details
 }
 
 enum validationResponses {

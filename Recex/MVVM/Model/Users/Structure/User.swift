@@ -35,7 +35,7 @@ class User : Identifiable, Person, ObservableObject {
     
     
     var Preferences: [String: String] = [:]
-    var Communities: [[String]] = [[]]
+    var Communities: [String: [String : String]] = [:]
     
     var ExtraData: [[[String]]]?
     
@@ -48,10 +48,10 @@ class User : Identifiable, Person, ObservableObject {
     var URLs : [String: String]
     
     
-    static let shared = User(PersonID: "-1", Firstname: "", Lastname: "", Email: "", Creation: "", Role: "", SuggestionModelData: "", Posts: [], Followers: [], Following: [], ShareIdentifier: "", PantryNeeded: [:], PantryOwned: [:], Preferences: [:], Communities: [[]])
+    static let shared = User(PersonID: "-1", Firstname: "", Lastname: "", Email: "", Creation: "", Role: "", SuggestionModelData: "", Posts: [], Followers: [], Following: [], ShareIdentifier: "", PantryNeeded: [:], PantryOwned: [:], Preferences: [:], Communities: [:])
     
     //Init With All Expected Value
-    init(PersonID: String, Firstname: String, Lastname: String, Email:String, Creation:String, Role:String, SuggestionModelData:String, Posts:[String], Followers: [String], Following: [String], ShareIdentifier: String, PantryNeeded: [String : Int], PantryOwned : [String : Int], Preferences:[String: String], Communities: [[String]]) {
+    init(PersonID: String, Firstname: String, Lastname: String, Email:String, Creation:String, Role:String, SuggestionModelData:String, Posts:[String], Followers: [String], Following: [String], ShareIdentifier: String, PantryNeeded: [String : Int], PantryOwned : [String : Int], Preferences:[String: String], Communities: [String: [String: String]]) {
 
         URLs = db.urlDict
         
@@ -88,7 +88,6 @@ class User : Identifiable, Person, ObservableObject {
         let _ = queryData(completion: {
             (response, error) in
             if(error != nil ) {
-                
             } else {
                 let userData = response as! UserDataResponse
                 let user : User = .shared
@@ -97,12 +96,15 @@ class User : Identifiable, Person, ObservableObject {
                 user.Lastname = userData.Lastname
                 user.Email = userData.Email
                 user.Creation = userData.Created
+                user.Communities = userData.Communities
+                
             }
         })
     }
     func queryData ( completion: @escaping(HTTPResponse, _ _error: Error?) -> (Void)) -> validationResponses? {
         let fetchDataRequestJ =  FetchUserJSONModel(authentication_key: "-", request: requests[.user] ?? "", ID: "\(user_cons.PersonID)")
         guard let fetchDataRequestJSON = try? JSONEncoder().encode(fetchDataRequestJ) else { return nil }
+
         firstly {
             query.Request(urlString: URLs["fetchUserDataURL"] ?? "", jsonData: fetchDataRequestJSON, responseFormat: .user)
         }.done { (response : HTTPResponse) in

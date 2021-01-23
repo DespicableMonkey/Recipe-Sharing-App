@@ -47,24 +47,36 @@ class CreateCommunityViewModel : ObservableObject {
             self.alertTxt = "Community must have an image"
         } else {
             self.createCommunityMediate()
-            self.shouldPopView = true
         }
          self.isLoading = false
     }
     func createCommunityMediate() {
+        let _ = createCommunity(completion: {
+            (response, error) in
+            if(error != nil ) {
+                print(error?.localizedDescription)
+                print("error")
+            } else {
+                self.user.fetchData()
+                self.shouldPopView = true
+            }
+        })
         
     }
-    func createCommunity(email: String, password: String, completion: @escaping(validationResponses, _ error: Error?) -> (Void)) -> validationResponses {
-        let createCommunityRequestJSON = BasicWithInfoJSONModel(authentication_key: "_", request: "create", info: user.PersonID)
+    func createCommunity(completion: @escaping(validationResponses, _ error: Error?) -> (Void)) -> validationResponses {
+//        guard let imgData : Data = (self.communityImage.pngData()) else { return .error }
+//        let imgString : String = String(decoding: imgData, as: UTF8.self)
+        let createCommunityRequestJSON = BasicWithInfoFourJSONModel(authentication_key: "_", request: "create", info_one: self.communityName, info_two: self.communityDescription, info_three: "ImageUploadedAsMultipartForm", info_four: user.PersonID)
         guard let createCommunityRequestJSONData = try? JSONEncoder().encode(createCommunityRequestJSON) else { return .error }
+        let imgData : [UIImage : String]
         firstly {
-            query.Request(urlString: query.db.URLs["createCommunityURL"] ?? "", jsonData: createCommunityRequestJSONData, responseFormat: .basic)
+            query.RequestWithImage(urlString: Database.URLs["createCommunityURL"] ?? "", jsonData: createCommunityRequestJSONData, responseFormat: .basic, imageData: [self.communityImage: "CommunityImage"])
         }.done { (response : HTTPResponse) in
             guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
             let verdict : validationResponses = {
                 switch(convertedResponse.result){
-                    case "account_created": return .success
-                    case "account_exists" : return .customResponse1
+                    case "community_created": return .success
+                    case "error" : return .error
                     default: return .error
                 }
             }()

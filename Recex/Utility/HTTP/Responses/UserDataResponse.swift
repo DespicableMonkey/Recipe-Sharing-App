@@ -15,4 +15,6 @@ struct UserDataResponse : HTTPResponse, Codable {
     var Username: String
     var Email: String
     var Created: String
+    var Communities:[String: [String: String]]
+    var status: String
 }

@@ -11,23 +11,29 @@ import CommonCrypto
 
 struct Database {
     var urlDict = [
-        "verifyConnectionIntegrity" : "http://recex.applications.pulkith.com/services/cross-check",
-        "connectionTestURL" : "http://recex.applications.pulkith.com/sercices/attempt-connection",
-        "authenticationURL" : "http://recex.applications.pulkith.com/account/mobile/services/authentication",
-        "selectDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/select",
-        "updateDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/update",
-        "insertDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/insert",
+        "verifyConnectionIntegrity" : "https://recex.applications.pulkith.com/services/cross-check",
+        "connectionTestURL" : "https://recex.applications.pulkith.com/sercices/attempt-connection",
+        "authenticationURL" : "https://recex.applications.pulkith.com/account/mobile/services/authentication",
+        "selectDataURL" : "https://recex.applications.pulkith.com/account/mobile/services/select",
+        "updateDataURL" : "https://recex.applications.pulkith.com/account/mobile/services/update",
+        "insertDataURL" : "https://recex.applications.pulkith.com/account/mobile/services/insert",
         
-        "public_api-ingredientsURL" : "http://recex.applications.pulkith.com/mobile/public_api/resources?request=ingredients-master",
+        "public_api-ingredientsURL" : "https://recex.applications.pulkith.com/mobile/public_api/resources?request=ingredients-master",
         
-        "fetchUserDataURL" : "http://recex.applications.pulkith.com/account/mobile/services/fetch",
+        "fetchUserDataURL" : "https://recex.applications.pulkith.com/account/mobile/services/fetch",
         
-        "createCommunityURL" : "http://recex.applications.pulkith.com/mobile/communities/create"
+        "createCommunityURL" : "https://recex.applications.pulkith.com/mobile/communities/create",
+        "fetchCommunityDataURL": "https://recex.applications.pulkith.com/mobile/communities/fetch",
+        "fetchCommunityImageURL": "https://recex.applications.pulkith.com/mobile/communities/fetchImage"
                     ]
+    
+    static var URLs : [String: String] = [:]
+    
     var Account : AccountModel
     
     init() {
         Account = AccountModel(urls: urlDict)
+        Database.URLs = urlDict
         let _ = configure()
     }
     

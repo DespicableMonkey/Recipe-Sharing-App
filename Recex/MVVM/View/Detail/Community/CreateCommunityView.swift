@@ -105,7 +105,6 @@ struct CreateCommunityView: View {
                     if shouldPop {
                         self.presentationmode.wrappedValue.dismiss()
                     }
-                    print("hit")
                 }
                 .background(Color("ColorThemeMain"))
                 .cornerRadius(15)

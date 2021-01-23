@@ -8,6 +8,8 @@
 import Foundation
 import PromiseKit
 
+//TODO: Get primary key when signup up.
+
 struct AccountModel {
     let query = Query()
     var URLs : [String: String]

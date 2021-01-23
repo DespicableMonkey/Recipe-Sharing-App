@@ -108,7 +108,6 @@ struct PantryView: View {
             }
             Spacer()
         }
-        .padding(.top, 125)
         
     }
 }

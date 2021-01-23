@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 struct Community {
     //Primary Key of the Community
@@ -18,16 +19,18 @@ struct Community {
     //the join code for the community that goes into the community value in the link below
     var joinCode : String
     // the link given to share
-    var joinLink = "http://recex.applications.pulkith.com/mobile/join?community=&request=mobile&type=link&response=none"
+    var joinLink = "https://recex.applications.pulkith.com/mobile/communities/join?request=mobile&code="
     
     //the name of the community
     var name : String
     // the description of the community
     var description : String
     //an optional image for the community
-    var image : UIImage?
+    var image : UIImage
     //the number of participants in the community
     var participants : Int
     //the creator/owner of the community who has the sole     ability to dissolve it and kick members
     var chiefCook : String
+    
+    var notifications : Int
 }
