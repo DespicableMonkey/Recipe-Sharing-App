@@ -15,7 +15,6 @@ struct InviteFriends: View {
     
     
     @StateObject var model = InviteFriendsViewModel()
-    
     var body: some View {
             VStack{
                 HStack{

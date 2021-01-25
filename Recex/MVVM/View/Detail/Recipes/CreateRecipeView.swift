@@ -11,26 +11,31 @@ import SwiftUI
 
 struct CreateRecipeView: View {
     @StateObject var model = AddRecipeViewModel()
-
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
         VStack {
             HStack {
-                Image("BackIcon")
-                    .padding()
+                Button(action: {self.presentationMode.wrappedValue.dismiss()}, label: {
+                    Image("BackIcon")
+                        .padding()
+                })
                 
                 Spacer()
                 
-                Button(action: {}, label: {
+                Button(action: {
+                    model.publishMediate()
+                }, label: {
                     Text("Publish")
                         .foregroundColor(Color.white)
                         .padding([.top, .bottom])
                         .padding([.trailing, .leading])
-                        .overlay(model.disabledPublish ? Color.gray.opacity(0.5) : Color.gray.opacity(0))
+                        .overlay(!(model.recipeTitle.length > 0 && model.description.length > 0 && model.servings.length > 0 && model.difficulty.length > 0 && model.cookTime.length > 0 && model.ingredients.count > 0 && model.ingredients[0].length > 0 && model.steps.count > 0 && model.steps[0].length > 0) ? Color.gray.opacity(0.5) : Color.gray.opacity(0))
                 })
                 .background(Color("ColorThemeMain"))
                 .cornerRadius(10)
                 .padding(.trailing, 20)
-                .disabled(model.disabledPublish)
+                .disabled(!(model.recipeTitle.length > 0 && model.description.length > 0 && model.servings.length > 0 && model.difficulty.length > 0 && model.cookTime.length > 0 && model.ingredients.count > 0 && model.ingredients[0].length > 0 && model.steps.count > 0 && model.steps[0].length > 0))
             }
             Divider()
             ScrollView(.vertical, showsIndicators: false, content: {
@@ -53,7 +58,7 @@ struct CreateRecipeView: View {
                 Divider()
                 
                 HStack {
-                    VStack (alignment: .leading){
+                    VStack {
                         Text("Details")
                             .font(.title)
                             .fontWeight(.bold)
@@ -67,14 +72,15 @@ struct CreateRecipeView: View {
                         CustomTextField_V2(placeholder: "Cook Time: 45 minutes", txt: $model.cookTime, fontSize: .title3)
                         
                         CustomTextField_V2(placeholder: "Difficulty: Meduim", txt: $model.difficulty, fontSize: .title3)
-                    }
+                    }.padding()
+                    
                 }
                 .background(Color.white)
                 .padding([.leading, .trailing], 10)
                 .cornerRadius(5)
                 
                 HStack {
-                    VStack (alignment: .leading){
+                    VStack {
                         Text("Ingredients")
                             .font(.title)
                             .fontWeight(.bold)
@@ -87,9 +93,12 @@ struct CreateRecipeView: View {
                                             model.ingredients.remove(at: index)
                                         }
                                     }
+                                    
                                 CustomTextField_V2(placeholder: "250ml Water", txt: $model.ingredients[index], fontSize: .title3)
+                                    .frame(width: UIScreen.main.bounds.width)
                             }
                         }
+                        
                         
                         Button(action: {
                             model.ingredients.append("")
@@ -112,85 +121,13 @@ struct CreateRecipeView: View {
                 .cornerRadius(5)
                 
                 HStack {
-                    VStack (alignment: .leading){
+                    VStack {
                         Text("Steps")
                             .font(.title)
                             .fontWeight(.bold)
                             .padding()
                         ForEach(0..<model.steps.count, id: \.self){ index in
-                            HStack {
-                                VStack (spacing: 8){
-                                    HStack (spacing : 8) {
-                                        
-                                        ZStack {
-                                            Circle()
-                                                .frame(width: 30, height: 30)
-                                                .foregroundColor(Color("ColorThemeMain"))
-                                            Text("#\(index+1)")
-                                                .foregroundColor(.white)
-                                        }
-                                        
-                                        CustomMultilineTF(text: $model.steps[index], height: $model.stepTFHeights[index], placeholder: "Step #\(index+1)")
-                                            .frame(height: model.stepTFHeights[index] < 300 ? model.stepTFHeights[index] : 300 )
-                                            .background(Color.white)
-                                            .cornerRadius(10)
-                                        
-                                        Image(systemName: "trash")
-                                            .foregroundColor(.red)
-                                            .onTapGesture {
-                                                if(model.steps.count > 1){
-                                                    model.steps.remove(at: 1)
-                                                }
-                                            }
-                                    }
-                                    
-                                    if(model.stepImages[index] != UIImage()){
-                                        Image(uiImage: model.stepImages[index])
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 150, height: 150)
-                                            .sheet(isPresented: $model.stepImagePresents[index], content: {
-                                                ImagePickerView(isPresented: $model.stepImagePresents[index], image: $model.stepImages[index])
-                                            })
-                                            .onTapGesture {
-                                                model.stepImagePresents[index].toggle()
-                                            }
-                                        
-                                        Image(systemName: "trash")
-                                            .foregroundColor(Color.red)
-                                            .onTapGesture {
-                                                model.stepImages[index] = UIImage()
-                                            }
-                                    }
-                                   else {
-                                        VStack (spacing: 20){
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .frame(width: 60, height: 50)
-                                                .scaledToFit()
-                                                .padding([.top, .leading, .trailing])
-                                            Text("Add an Image")
-                                                .font(.title2)
-                                                .fontWeight(.bold)
-                                                .padding([.bottom, .leading, .trailing])
-
-                                        }
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(15)
-                                        .sheet(isPresented: $model.stepImagePresents[index], content: {
-                                            ImagePickerView(isPresented: $model.stepImagePresents[index], image: $model.stepImages[index])
-                                        })
-                                        .onTapGesture {
-                                            model.stepImagePresents[index].toggle()
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                            
-                            
-                            .padding(.bottom, 40)
-                            .padding(.trailing, 10)
+                            RecipeStepView(txt: $model.steps[index], img: $model.stepImages[index], presentImgPicker: $model.stepImagePresents[index], txtHeight: $model.stepTFHeights[index], stepNumber: index+1)
                         }
                         Button(action: {
                             model.steps.append("")
@@ -214,8 +151,93 @@ struct CreateRecipeView: View {
                 .padding([.leading, .trailing], 10)
                 .cornerRadius(5)
             })
-            Spacer()
+
+            
         }.background(Color.gray.opacity(0.05))
     }
 }
 
+struct RecipeStepView : View {
+    
+    @Binding var txt : String
+    @Binding var img: UIImage
+    @Binding var presentImgPicker : Bool
+    @Binding var txtHeight: CGFloat
+    var stepNumber : Int
+    
+    
+    var body : some View {
+        HStack {
+            VStack (spacing: 8){
+                HStack (spacing : 8) {
+                    
+                    ZStack {
+                        Circle()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color("ColorThemeMain"))
+                        Text("#\(stepNumber)")
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    MultilineTextField("Step #\(stepNumber)", text: $txt)
+                    
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .padding()
+                        .onTapGesture {
+//                            if(model.steps.count > 1){
+//                                model.steps.remove(at: 1)
+//                            }
+                        }
+                }
+                .padding()
+                
+                if(img != UIImage()){
+                    Image(uiImage: img)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                        .sheet(isPresented: $presentImgPicker, content: {
+                            ImagePickerView(isPresented: $presentImgPicker, image: $img)
+                        })
+                        .onTapGesture {
+                           presentImgPicker.toggle()
+                        }
+                    
+                    Image(systemName: "trash")
+                        .foregroundColor(Color.red)
+                        .onTapGesture {
+                          img = UIImage()
+                        }
+                }
+               else {
+                    VStack (spacing: 20){
+                        Image(systemName: "photo")
+                            .resizable()
+                            .frame(width: 60, height: 50)
+                            .scaledToFit()
+                            .padding([.top, .leading, .trailing])
+                        Text("Add an Image")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding([.bottom, .leading, .trailing])
+
+                    }
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(15)
+                    .sheet(isPresented: $presentImgPicker, content: {
+                        ImagePickerView(isPresented: $presentImgPicker, image: $img)
+                    })
+                    .onTapGesture {
+                        presentImgPicker.toggle()
+                    }
+                }
+                
+                
+            }
+            .padding()
+        }
+        .padding(.bottom, 40)
+        .padding(.trailing, 10)
+    }
+}

@@ -1,4 +1,5 @@
 PODS:
+  - lottie-ios (3.1.9)
   - PromiseKit (6.13.1):
     - PromiseKit/CorePromise (= 6.13.1)
     - PromiseKit/Foundation (= 6.13.1)
@@ -10,15 +11,18 @@ PODS:
     - PromiseKit/CorePromise
 
 DEPENDENCIES:
+  - lottie-ios
   - PromiseKit (~> 6.8)
 
 SPEC REPOS:
   trunk:
+    - lottie-ios
     - PromiseKit
 
 SPEC CHECKSUMS:
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
 
-PODFILE CHECKSUM: 927256fbf28d61600dcdab3e3ed374052bc7c4f1
+PODFILE CHECKSUM: 81a66b63bdd8e09522072f501b9d52620b95712f
 
 COCOAPODS: 1.10.0

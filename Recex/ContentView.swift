@@ -21,13 +21,6 @@ struct ContentView: View {
             if status{
                 
                 VStack(spacing: 25){
-                    
-                    Text("Logged In As {User}")
-                    
-                    //                    Button(action: model.logOut, label: {
-                    //                        Text("LogOut")
-                    //                            .fontWeight(.bold)
-                    //                    })
                 }
             }
             else{

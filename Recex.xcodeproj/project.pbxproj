@@ -51,6 +51,9 @@
 		799DC34B25B7BEA8007154BD /* ResponseWithDetailsHTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799DC34A25B7BEA8007154BD /* ResponseWithDetailsHTTPResponse.swift */; };
 		79BE7AB325BA68AD00A85C5C /* FetchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE7AB225BA68AD00A85C5C /* FetchImage.swift */; };
 		79BE7AB925BBF50E00A85C5C /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE7AB825BBF50E00A85C5C /* ViewManager.swift */; };
+		79BE7ACB25BBFB3100A85C5C /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE7ACA25BBFB3100A85C5C /* CommunityView.swift */; };
+		79BE7AED25BCCC1000A85C5C /* CommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE7AEC25BCCC1000A85C5C /* CommunityViewModel.swift */; };
+		79BE7B0225BD076E00A85C5C /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE7B0125BD076E00A85C5C /* BottomSheetView.swift */; };
 		79CB107D256EE7F000CC5DAE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB107C256EE7F000CC5DAE /* LoginView.swift */; };
 		79CB1085256EE86100CC5DAE /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1084256EE86100CC5DAE /* SignUpView.swift */; };
 		79CB108A256EE97A00CC5DAE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB1089256EE97A00CC5DAE /* LoginViewModel.swift */; };
@@ -154,6 +157,9 @@
 		799DC34A25B7BEA8007154BD /* ResponseWithDetailsHTTPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseWithDetailsHTTPResponse.swift; sourceTree = "<group>"; };
 		79BE7AB225BA68AD00A85C5C /* FetchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImage.swift; sourceTree = "<group>"; };
 		79BE7AB825BBF50E00A85C5C /* ViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
+		79BE7ACA25BBFB3100A85C5C /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		79BE7AEC25BCCC1000A85C5C /* CommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewModel.swift; sourceTree = "<group>"; };
+		79BE7B0125BD076E00A85C5C /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		79CB107C256EE7F000CC5DAE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		79CB1084256EE86100CC5DAE /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		79CB1089256EE97A00CC5DAE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -225,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				791814CE25996C89007992C6 /* CreateCommunityView.swift */,
+				79BE7ACA25BBFB3100A85C5C /* CommunityView.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -378,6 +385,7 @@
 			children = (
 				791814E72599A647007992C6 /* CreateCommunityViewModel.swift */,
 				790CA6A825B412D500D390CB /* CommunityListViewModel.swift */,
+				79BE7AEC25BCCC1000A85C5C /* CommunityViewModel.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -472,6 +480,7 @@
 				795161CF2597F55C00395654 /* CustomTextFields.swift */,
 				791814AF25985A08007992C6 /* AnimatedCheckMarkView.swift */,
 				79BE7AB225BA68AD00A85C5C /* FetchImage.swift */,
+				79BE7B0125BD076E00A85C5C /* BottomSheetView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -851,6 +860,7 @@
 				79CB116125721FE100CC5DAE /* Person.swift in Sources */,
 				791814BF25987656007992C6 /* UserDataResponse.swift in Sources */,
 				79CB1157257213D200CC5DAE /* InviteFriends.swift in Sources */,
+				79BE7AED25BCCC1000A85C5C /* CommunityViewModel.swift in Sources */,
 				79CB10DC256EEC3000CC5DAE /* Query.swift in Sources */,
 				79BE7AB325BA68AD00A85C5C /* FetchImage.swift in Sources */,
 				79CB118025722F0F00CC5DAE /* InviteFriendsViewModel.swift in Sources */,
@@ -876,6 +886,7 @@
 				791814BA259870FD007992C6 /* ResponseWithInfoHTTPResponse.swift in Sources */,
 				796B5D1025AE3C640076768B /* BasicWithInfoFour.swift in Sources */,
 				7993A6462591CCD400237F9A /* ErrorResponse.swift in Sources */,
+				79BE7ACB25BBFB3100A85C5C /* CommunityView.swift in Sources */,
 				794BEDB025746C8E00331AD7 /* NeededIngredients.swift in Sources */,
 				7993A6532591D19700237F9A /* IngredientsHTTPResponse.swift in Sources */,
 				7957801D256C4C6300D1B2AC /* Recex.xcdatamodeld in Sources */,
@@ -911,6 +922,7 @@
 				79620628259546930077000D /* RecipePost.swift in Sources */,
 				79CB1096256EEA0D00CC5DAE /* Enums.swift in Sources */,
 				79CB113D2571936400CC5DAE /* NavigationView.swift in Sources */,
+				79BE7B0225BD076E00A85C5C /* BottomSheetView.swift in Sources */,
 				79CB10B6256EEAE300CC5DAE /* Request.swift in Sources */,
 				790CA6A425B3AD8200D390CB /* UIDevice.swift in Sources */,
 				795161C62597F50200395654 /* ImagePickerView.swift in Sources */,

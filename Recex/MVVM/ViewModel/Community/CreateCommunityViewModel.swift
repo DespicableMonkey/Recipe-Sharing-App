@@ -54,8 +54,6 @@ class CreateCommunityViewModel : ObservableObject {
         let _ = createCommunity(completion: {
             (response, error) in
             if(error != nil ) {
-                print(error?.localizedDescription)
-                print("error")
             } else {
                 self.user.fetchData()
                 self.shouldPopView = true
@@ -68,7 +66,6 @@ class CreateCommunityViewModel : ObservableObject {
 //        let imgString : String = String(decoding: imgData, as: UTF8.self)
         let createCommunityRequestJSON = BasicWithInfoFourJSONModel(authentication_key: "_", request: "create", info_one: self.communityName, info_two: self.communityDescription, info_three: "ImageUploadedAsMultipartForm", info_four: user.PersonID)
         guard let createCommunityRequestJSONData = try? JSONEncoder().encode(createCommunityRequestJSON) else { return .error }
-        let imgData : [UIImage : String]
         firstly {
             query.RequestWithImage(urlString: Database.URLs["createCommunityURL"] ?? "", jsonData: createCommunityRequestJSONData, responseFormat: .basic, imageData: [self.communityImage: "CommunityImage"])
         }.done { (response : HTTPResponse) in

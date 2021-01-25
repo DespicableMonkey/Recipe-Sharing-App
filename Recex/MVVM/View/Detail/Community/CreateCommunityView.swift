@@ -123,9 +123,4 @@ struct CreateCommunityView: View {
     }
 }
 
-struct CreateCommunityView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateCommunityView()
-    }
-}
 

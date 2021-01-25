@@ -24,7 +24,9 @@ struct Database {
         
         "createCommunityURL" : "https://recex.applications.pulkith.com/mobile/communities/create",
         "fetchCommunityDataURL": "https://recex.applications.pulkith.com/mobile/communities/fetch",
-        "fetchCommunityImageURL": "https://recex.applications.pulkith.com/mobile/communities/fetchImage"
+        "fetchCommunityImageURL": "https://recex.applications.pulkith.com/mobile/communities/fetchImage",
+        
+        "publishRecipeURL" : "https://recex.applications.pulkith.com/mobile/recipes/publish"
                     ]
     
     static var URLs : [String: String] = [:]

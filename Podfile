@@ -5,6 +5,7 @@
 
 target 'Recex' do
   pod "PromiseKit", "~> 6.8"
+  pod 'lottie-ios'
 
   # Pods for Recex
 

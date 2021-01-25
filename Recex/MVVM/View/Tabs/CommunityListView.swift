@@ -14,42 +14,46 @@ struct CommunityListView: View {
     @StateObject var model : CommunityListViewModel = CommunityListViewModel()
     
     var body: some View {
-        VStack (spacing: 5){
-            if(model.communities.count == 0) {
-                NoCommunitiesListView(createCommunityIsPresented: self.$createCommunityIsPresented)
-            } else {
-                VStack {
-                    ForEach(0..<model.communities.count, id:\.self) {index in
-                        CommunityView(community: model.communities[index])
-                        if(index != model.communities.count - 1) {
-                            Divider()
-                                .padding([.leading, .trailing])
-                                .padding([.top], 10)
-                        }
-                    }
-                    
-                    Divider()
-                        .padding()
-                    
-                    Button(action: {self.createCommunityIsPresented.toggle()}) {
+            VStack (spacing: 5){
+                if(model.communities.count == 0) {
+                    NoCommunitiesListView(createCommunityIsPresented: self.$createCommunityIsPresented)
+                } else {
+                    ScrollView(.vertical, showsIndicators: false, content: {
                         VStack {
-                            Text("Create New Community")
-                                .foregroundColor(Color.white)
-                                .font(.title2)
-                                .fontWeight(.bold)
+                            ForEach(0..<model.communities.count, id:\.self) {index in
+                                NavigationLink(destination: CommunityView(community: model.communities[index])) {
+                                    CommunityListResultView(community: model.communities[index])
+                                }
+                                if(index != model.communities.count - 1) {
+                                    Divider()
+                                        .padding([.leading, .trailing])
+                                        .padding([.top], 10)
+                                }
+                            }
+                            
+                            Divider()
                                 .padding()
+                            
+                            Button(action: {self.createCommunityIsPresented.toggle()}) {
+                                VStack {
+                                    Text("Create New Community")
+                                        .foregroundColor(Color.white)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .padding()
+                                }
+                                .background(Color("ColorThemeMain"))
+                                .cornerRadius(15)
+                            }
+                            
+                            Spacer()
                         }
-                        .background(Color("ColorThemeMain"))
-                        .cornerRadius(15)
-                    }
-                    
-                    Spacer()
+                    })
                 }
             }
-        }
-        .sheet(isPresented: self.$createCommunityIsPresented, content: {
-            CreateCommunityView()
-        })
+            .sheet(isPresented: self.$createCommunityIsPresented, content: {
+                CreateCommunityView()
+            })
     }
 }
 
@@ -84,7 +88,7 @@ struct NoCommunitiesListView : View {
     }
 }
 
-struct CommunityView : View {
+struct CommunityListResultView : View {
     @State var community : Community
     var body : some View {
         VStack {

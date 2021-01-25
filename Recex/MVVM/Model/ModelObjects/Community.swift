@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-struct Community {
+struct Community : Identifiable{
     //Primary Key of the Community
     var id : String
     //Whether the user is in this community or not

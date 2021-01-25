@@ -109,7 +109,8 @@ struct Query {
             var imgData : [NSData: String] = [:]
             
             for (img, name) in imageData {
-                let imageData = img.jpegData(compressionQuality: 1)
+                // reduce image size(keeping same ratio & resolution), reduces a ~10 image upload from >20 seconds to 1-2 seconds
+                let imageData = (img ?? UIImage()).jpegData(compressionQuality: 0.1)
                 if imageData == nil  {
                     throw RuntimeError("Failed To Upload Images")
                 }
@@ -117,7 +118,6 @@ struct Query {
             }
             
             request.httpBody = createBodyWithParametersImages(parameters: jsonData, filePathKey: "file", imgData: imgData, boundary: boundary) as Data
-            
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 // Error During Request
                 if error != nil {
@@ -213,27 +213,32 @@ struct Query {
         if let params = convertToDictionary(text: String(decoding:parameters, as: UTF8.self)) {
             for (key, value) in params {
                 body.appendString(string: "--\(boundary)\r\n")
-                body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(key)\"\r\n\r\n")
                 body.appendString(string: "\(value)\r\n")
             }
         }
+        if(imgData.count > 0) {
+            body.appendString(string: "--\(boundary)\r\n")
+            body.appendString(string: "Content-Disposition: multipart/form-data; name=\"image_count\"\r\n\r\n")
+            body.appendString(string: "\(imgData.count)\r\n")
+        }
         //increement filePathKey to allow for multiple files
+        var fileCount = 0
         for (img, name) in imgData {
             let filename = "\(name).jpg"
             let mimetype = "image/jpg"
             
             body.appendString(string: "--\(boundary)\r\n")
-            body.appendString(string: "Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
+            body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(filePathKey!)-\(fileCount)\"; filename=\"\(filename)\"\r\n")
             body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
             body.append(img as Data)
             body.appendString(string: "\r\n")
             body.appendString(string: "--\(boundary)--\r\n")
+            fileCount += 1
         }
-        
-//        /$_POST = json_decode(file_get_contents('php://input'), true);
-        
-
-        
+        if(imgData.count == 0) {
+            body.appendString(string: "--\(boundary)--\r\n")
+        }
         return body
     }
     
@@ -273,5 +278,24 @@ extension NSMutableData {
     func appendString(string: String) {
         let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
         append(data!)
+    }
+}
+
+extension UIImage {
+    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
     }
 }

@@ -44,122 +44,143 @@ struct NavigationController: View {
     
     @State var centerX : CGFloat = 0
     var body: some View {
-        if(self.logout) {
-            LoginView()
-        } else {
-                VStack (spacing : 0){
+        NavigationView {
+            if(self.logout) {
+                LoginView()
+            } else {
+                    VStack (spacing : 0){
 
-                        VStack {
-                            ZStack {
-                                HStack {
-                                    Button(action: {
-                                        withAnimation(.default){
-                                            self.show.toggle()
+                            VStack {
+                                ZStack {
+                                    HStack {
+                                        Button(action: {
+                                            withAnimation(.default){
+                                                self.show.toggle()
+                                            }
+                                        }) {
+                                            Image("MenuIcon")
+                                                .resizable()
+                                                .frame(width: 25, height: 25)
                                         }
-                                    }) {
-                                        Image("MenuIcon")
-                                            .resizable()
-                                            .frame(width: 25, height: 25)
+                                        Spacer()
                                     }
-                                    Spacer()
+                                    Text("\(selected)")
+                                        .font(.title)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(Color("ColorThemeMain"))
+                                    
+                                    HStack {
+                                        Spacer()
+                                        Button(action: {
+                                            
+                                        }) {
+                                            Image(systemName: "plus.square")
+                                                .resizable()
+                                                .frame(width:25, height: 25)
+                                                .fullScreenCover(isPresented: self.$PresentNewRecipe){
+                                                    CreateRecipeView()
+                                                }
+                                                .onTapGesture {
+                                                    self.PresentNewRecipe.toggle()
+                                                }
+                                        }
+                                       
+                                    }
+                                    
                                 }
-                                Text("\(selected)")
-                                    .font(.title)
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(Color("ColorThemeMain"))
+                                .padding()
+                                .padding(.top,0)
+                                .padding(.bottom, 0)
+                                .foregroundColor(.primary)
+                                .overlay(Rectangle().stroke(Color.primary.opacity(0.1), lineWidth: 1).shadow(radius: 3).edgesIgnoringSafeArea(.top))
+                                //background(Color("ColorThemeMain"))
                                 
-                                HStack {
-                                    Spacer()
-                                    Button(action: {
-                                        
-                                    }) {
-                                        Image(systemName: "plus.square")
-                                            .resizable()
-                                            .frame(width:25, height: 25)
-                                            .sheet(isPresented: self.$PresentNewRecipe){
-                                                CreateRecipeView()
-                                            }
-                                            .onTapGesture {
-                                                self.PresentNewRecipe.toggle()
-                                            }
-                                    }
-                                   
-                                }
                                 
                             }
-                            .padding()
-                            .padding(.top,0)
-                            .foregroundColor(.primary)
-                            .overlay(Rectangle().stroke(Color.primary.opacity(0.1), lineWidth: 1).shadow(radius: 3).edgesIgnoringSafeArea(.top))
-                            //background(Color("ColorThemeMain"))
-                            
-                            
-                        }
-                        .padding(.bottom)
-                    
-                    
-                    TabView(selection: $selected){
-                        HomeView()
-                            .tag(tabItems[0])
-                            .ignoresSafeArea(.all, edges: .top)
-                        Color.blue
-                            .tag(tabItems[1])
-                            .ignoresSafeArea(.all, edges: .top)
-                        CommunityListView()
-                            .tag(tabItems[2])
-                            .ignoresSafeArea(.all, edges: .top)
-                        PantryView()
-                            .tag(tabItems[3])
-                            .ignoresSafeArea(.all, edges: .top)
-                        Color.green
-                            .tag(tabItems[4])
-                            .ignoresSafeArea(.all, edges: .top)
-                    }
-                    HStack(spacing: 0){
+                           
                         
-                        ForEach(tabItems,id: \.self){value in
-                            
-                            GeometryReader{reader in
-                                
-                                TabBarButton(selected: $selected, value: value, image: tabItemIcons[tabItems.firstIndex(of: value) ?? 0], centerX: $centerX, rect: reader.frame(in: .global))
-                                    // setting First Intial Curve...
-                                    .onAppear(perform: {
-                                        
-                                        if value == tabItems.first{
-                                            centerX = reader.frame(in: .global).midX
-                                        }
-                                    })
-                            }
-                            .frame(width: 70, height: 50)
-                            
-                            if value != tabItems.last{Spacer(minLength: 0)}
+                        
+                        TabView(selection: $selected){
+                            HomeView()
+                                .tag(tabItems[0])
+                                .ignoresSafeArea(.all, edges: .top)
+                                .navigationBarTitle("") //this must be empty
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
+                            Color.blue
+                                .tag(tabItems[1])
+                                .ignoresSafeArea(.all, edges: .top)
+                                .navigationBarTitle("") //this must be empty
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
+                            CommunityListView()
+                                .tag(tabItems[2])
+                                .ignoresSafeArea(.all, edges: .top)
+                                .navigationBarTitle("") //this must be empty
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
+                            PantryView()
+                                .tag(tabItems[3])
+                                .ignoresSafeArea(.all, edges: .top)
+                                .navigationBarTitle("") //this must be empty
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
+                            Color.green
+                                .tag(tabItems[4])
+                                .ignoresSafeArea(.all, edges: .top)
+                                .navigationBarTitle("") //this must be empty
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
                         }
+                        .navigationBarTitle("") //this must be empty
+                        .navigationBarHidden(true)
+                        .navigationBarBackButtonHidden(true)
+                        HStack(spacing: 0){
+                            
+                            ForEach(tabItems,id: \.self){value in
+                                
+                                GeometryReader{reader in
+                                    
+                                    TabBarButton(selected: $selected, value: value, image: tabItemIcons[tabItems.firstIndex(of: value) ?? 0], centerX: $centerX, rect: reader.frame(in: .global))
+                                        // setting First Intial Curve...
+                                        .onAppear(perform: {
+                                            
+                                            if value == tabItems.first{
+                                                centerX = reader.frame(in: .global).midX
+                                            }
+                                        })
+                                }
+                                .frame(width: 70, height: 50)
+                                
+                                if value != tabItems.last{Spacer(minLength: 0)}
+                            }
+                        }
+                        .padding(.horizontal,25)
+                        .padding(.top)
+                        // For Smaller Size iPhone Padding Will be 15 And For Notch Phones No Padding
+                        
+                        // (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
+                        .padding(.bottom,UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 15 : 0)
+                        .background(Color.white.clipShape(AnimatedShape(centerX: centerX)))
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -5)
+                        .padding(.top, -15)
+                        
                     }
-                    .padding(.horizontal,25)
-                    .padding(.top)
-                    // For Smaller Size iPhone Padding Will be 15 And For Notch Phones No Padding
                     
-                    // (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
-                    .padding(.bottom,UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 15 : 0)
-                    .background(Color.white.clipShape(AnimatedShape(centerX: centerX)))
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -5)
-                    .padding(.top, -15)
-                    
-                }
-                
-                HStack {
-                    Menu(dark: self.$dark, show: self.$show, logout: self.$logout)
-                        .preferredColorScheme(self.dark ? .dark : .light)
-                        .offset(x: self.show ? 0 : -UIScreen.main.bounds.width / 1.5)
-                    
-                    Spacer(minLength: 0)
-                    
-                }
-                .edgesIgnoringSafeArea([.top, .bottom])
-                .background(Color.primary.opacity(self.show ? (self.dark ? 0.05 : 0.2) : 0).edgesIgnoringSafeArea(.all))
-                
-
+                    HStack {
+                        Menu(dark: self.$dark, show: self.$show, logout: self.$logout)
+                            .preferredColorScheme(self.dark ? .dark : .light)
+                            .offset(x: self.show ? 0 : -UIScreen.main.bounds.width / 1.5)
+                        
+                        Spacer(minLength: 0)
+                        
+                    }
+                    .edgesIgnoringSafeArea([.top, .bottom])
+                    .background(Color.primary.opacity(self.show ? (self.dark ? 0.05 : 0.2) : 0).edgesIgnoringSafeArea(.all))
+            }
+            
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
