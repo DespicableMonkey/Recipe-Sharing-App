@@ -50,7 +50,7 @@ class IngredientsViewModel : ObservableObject {
         guard let ingredientRequestJSONData = try? JSONEncoder().encode(ingredientRequestJSON) else { return .error}
         
         firstly {
-            query.Request(urlString: URLs["public_api-ingredientsURL"] ?? "", jsonData: ingredientRequestJSONData, responseFormat: .ingredients)
+            query.Request(urlString: URLs["public_api-ingredientsURL"] ?? "", jsonData: ingredientRequestJSONData, jsonModel: BasicJSONModel.self, responseFormat: .ingredients)
         }.done { (response : HTTPResponse) in
             guard let convertedResponse = (response as? IngredientsHTTPResponse) else { throw RuntimeError("Error Retrieving Ingredients")}
             completion(convertedResponse, nil) 

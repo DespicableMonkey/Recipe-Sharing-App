@@ -67,7 +67,7 @@ class CreateCommunityViewModel : ObservableObject {
         let createCommunityRequestJSON = BasicWithInfoFourJSONModel(authentication_key: "_", request: "create", info_one: self.communityName, info_two: self.communityDescription, info_three: "ImageUploadedAsMultipartForm", info_four: user.PersonID)
         guard let createCommunityRequestJSONData = try? JSONEncoder().encode(createCommunityRequestJSON) else { return .error }
         firstly {
-            query.RequestWithImage(urlString: Database.URLs["createCommunityURL"] ?? "", jsonData: createCommunityRequestJSONData, responseFormat: .basic, imageData: [self.communityImage: "CommunityImage"])
+            query.RequestWithImage(urlString: Database.URLs["createCommunityURL"] ?? "", jsonData: createCommunityRequestJSONData, jsonModel: BasicWithInfoFourJSONModel.self, responseFormat: .basic, imageData: [self.communityImage: "CommunityImage"])
         }.done { (response : HTTPResponse) in
             guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
             let verdict : validationResponses = {

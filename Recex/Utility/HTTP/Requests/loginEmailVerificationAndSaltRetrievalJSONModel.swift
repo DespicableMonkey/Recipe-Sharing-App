@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct loginEmailVerificationAndSaltRetrievalJSONModel : Codable, Request {
+struct loginEmailVerificationAndSaltRetrievalJSONModel : Codable, Request, Loopable  {
     var authentication_key: String
     var request: String
     

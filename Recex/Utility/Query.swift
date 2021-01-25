@@ -18,7 +18,7 @@ struct Query {
     ///   - jsonData: Request Data Formated Into a specifically created or generic Struct In Utility/HTTP/Requests, which is then encoded into JSON and a POST request for the server to interpret
     ///   - responseFormat: Struct similar to the JSONData in Utility/HTTP/Responses which the JSON response from the server is decoded into and later utilized. Specific Format is part of an enumeration in Resources/Enums and a exhuastive switch will pair the format with the correct struct.
     /// - Returns: Promise from the 3rd Party CocoaPod "PromiseKit", of type HTTPResponse which is a protocol all responseFormats conform to. Promises is this application's solution to utilziing data from async requests.
-    func Request(urlString: String,jsonData : Data, responseFormat : responseFormats) -> Promise<HTTPResponse> {
+    func Request<T: Request>(urlString: String,jsonData : Data, jsonModel : T.Type, responseFormat : responseFormats) -> Promise<HTTPResponse> {
         
         return Promise { seal in
             //Set & Create URL
@@ -35,13 +35,12 @@ struct Query {
             request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             
             //Set the Request JSON Data
-            request.httpBody = createBodyWithParameters(parameters: jsonData, boundary: boundary) as Data
+            request.httpBody = createBodyWithParameters(parameters: jsonData, type: jsonModel, boundary: boundary) as Data
             
             //Create the Request -> Closure with outcome
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 // Error During Request
                 if error != nil {
-                    //reject the Promse with the error
                     seal.reject(error!)
                 } else {
                     // Recieved data from request ( else reject the Promise with a RuntimeError Which is Parsed into text on the UI. Probable causes of this are incorrect links, or broken server-side code(mostly php)
@@ -91,7 +90,7 @@ struct Query {
         }
     }
     
-    func RequestWithImage(urlString: String,jsonData : Data, responseFormat : responseFormats, imageData: [UIImage: String]) -> Promise<HTTPResponse> {
+    func RequestWithImage<T: Request>(urlString: String,jsonData : Data, jsonModel : T.Type, responseFormat : responseFormats, imageData: [UIImage: String]) -> Promise<HTTPResponse> {
         return Promise { seal in
             //Set & Create URL
             let url = URL(string: urlString)
@@ -110,14 +109,14 @@ struct Query {
             
             for (img, name) in imageData {
                 // reduce image size(keeping same ratio & resolution), reduces a ~10 image upload from >20 seconds to 1-2 seconds
-                let imageData = (img ?? UIImage()).jpegData(compressionQuality: 0.1)
+                let imageData = img.jpegData(compressionQuality: 0.1)
                 if imageData == nil  {
                     throw RuntimeError("Failed To Upload Images")
                 }
                 imgData[imageData! as NSData] = name
             }
             
-            request.httpBody = createBodyWithParametersImages(parameters: jsonData, filePathKey: "file", imgData: imgData, boundary: boundary) as Data
+            request.httpBody = createBodyWithParametersImages(parameters: jsonData, type: jsonModel, filePathKey: "file", imgData: imgData, boundary: boundary) as Data
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 // Error During Request
                 if error != nil {
@@ -208,20 +207,28 @@ struct Query {
         return response
     }
     
-    func createBodyWithParametersImages(parameters: Data, filePathKey: String?, imgData: [NSData: String], boundary: String) -> NSData {
+    func createBodyWithParametersImages<T: Request>(parameters: Data, type: T.Type, filePathKey: String?, imgData: [NSData: String], boundary: String, useCustomKeys : Bool? = false) -> NSData {
         let body = NSMutableData();
-        if let params = convertToDictionary(text: String(decoding:parameters, as: UTF8.self)) {
-            for (key, value) in params {
-                body.appendString(string: "--\(boundary)\r\n")
-                body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(key)\"\r\n\r\n")
-                body.appendString(string: "\(value)\r\n")
-            }
-        }
-        if(imgData.count > 0) {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        let obj = try? JSONDecoder().decode(T.self, from: parameters)
+        guard let params =  try? obj?.allProperties() else { return body }
+        for(key, value) in params {
+             var keyAsData = Data()
+                if value is String { keyAsData = try! encoder.encode(value as! String) }
+                else if value is [Any] { keyAsData = try! encoder.encode(value as! [String]) }
+                else if value is [String: String] { keyAsData = try! encoder.encode(value as! [String: String])}
+                else if value is [String: [String: String]] {keyAsData = try! encoder.encode(value as! [String: [String: String]])}
+            let jsonParamater = (String(data: keyAsData, encoding: .utf8) ?? "").replacingOccurrences(of: "\"", with: "")
+            
             body.appendString(string: "--\(boundary)\r\n")
-            body.appendString(string: "Content-Disposition: multipart/form-data; name=\"image_count\"\r\n\r\n")
-            body.appendString(string: "\(imgData.count)\r\n")
+            body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(key)\"\r\n\r\n")
+            body.appendString(string: "\(jsonParamater)\r\n")
         }
+        body.appendString(string: "--\(boundary)\r\n")
+        body.appendString(string: "Content-Disposition: multipart/form-data; name=\"image_count\"\r\n\r\n")
+        body.appendString(string: "\(imgData.count)\r\n")
         //increement filePathKey to allow for multiple files
         var fileCount = 0
         for (img, name) in imgData {
@@ -229,7 +236,11 @@ struct Query {
             let mimetype = "image/jpg"
             
             body.appendString(string: "--\(boundary)\r\n")
-            body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(filePathKey!)-\(fileCount)\"; filename=\"\(filename)\"\r\n")
+            if(useCustomKeys != nil && (useCustomKeys!)) {
+                body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(name)\"; filename=\"\(filename)\"\r\n")
+            } else {
+                body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(filePathKey!)-\(fileCount)\"; filename=\"\(filename)\"\r\n")
+            }
             body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
             body.append(img as Data)
             body.appendString(string: "\r\n")
@@ -242,32 +253,31 @@ struct Query {
         return body
     }
     
-    func createBodyWithParameters(parameters: Data, boundary: String) -> NSData {
+    func createBodyWithParameters<T: Request>(parameters: Data, type: T.Type, boundary: String) -> NSData {
         let body = NSMutableData();
-        if let params = convertToDictionary(text: String(decoding:parameters, as: UTF8.self)) {
-            for (key, value) in params {
-                body.appendString(string: "--\(boundary)\r\n")
-                body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-                body.appendString(string: "\(value)\r\n")
-                body.appendString(string: "--\(boundary)--\r\n")
-            }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        let obj = try? JSONDecoder().decode(T.self, from: parameters)
+        guard let params =  try? obj?.allProperties() else { return body }
+        for(key, value) in params {
+             var keyAsData = Data()
+                if value is String { keyAsData = try! encoder.encode(value as! String) }
+                else if value is [Any] { keyAsData = try! encoder.encode(value as! [String]) }
+                else if value is [String: String] { keyAsData = try! encoder.encode(value as! [String: String])}
+                else if value is [String: [String: String]] {keyAsData = try! encoder.encode(value as! [String: [String: String]])}
+            let jsonParamater = (String(data: keyAsData, encoding: .utf8) ?? "").replacingOccurrences(of: "\"", with: "")
+            
+            body.appendString(string: "--\(boundary)\r\n")
+            body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(key)\"\r\n\r\n")
+            body.appendString(string: "\(jsonParamater)\r\n")
         }
-        return body
+        body.appendString(string: "--\(boundary)--\r\n")
+      return body
     }
-    
     func generateBoundaryString() -> String {
         return "Boundary-\(NSUUID().uuidString)"
     }
-    
-    func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            } catch {}
-        }
-        return nil
-    }
-    
     
 }
 
@@ -297,5 +307,43 @@ extension UIImage {
         return UIGraphicsImageRenderer(size: canvas, format: format).image {
             _ in draw(in: CGRect(origin: .zero, size: canvas))
         }
+    }
+}
+extension Dictionary {
+    var jsonStringRepresentation: String? {
+        guard let theJSONData = try? JSONSerialization.data(withJSONObject: self,
+                                                            options: [.prettyPrinted]) else {
+            return nil
+        }
+
+        return String(data: theJSONData, encoding: .ascii)
+    }
+}
+
+protocol Loopable {
+    func allProperties() throws -> [String: Any]
+}
+
+extension Loopable {
+    func allProperties() throws -> [String: Any] {
+
+        var result: [String: Any] = [:]
+
+        let mirror = Mirror(reflecting: self)
+
+        // Optional check to make sure we're iterating over a struct or class
+        guard let style = mirror.displayStyle, style == .struct || style == .class else {
+            throw NSError()
+        }
+
+        for (property, value) in mirror.children {
+            guard let property = property else {
+                continue
+            }
+
+            result[property] = value
+        }
+
+        return result
     }
 }

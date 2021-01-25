@@ -17,7 +17,6 @@ class InviteFriendsViewModel : ObservableObject{
     
     init(){
         ShareableLink = generateShareableLink(uid_share: user.ShareIdentifier)
-        print(ShareableLink)
         let _ = generateFriendURL()
     }
     

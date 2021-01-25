@@ -106,7 +106,7 @@ class User : Identifiable, Person, ObservableObject {
         guard let fetchDataRequestJSON = try? JSONEncoder().encode(fetchDataRequestJ) else { return nil }
 
         firstly {
-            query.Request(urlString: URLs["fetchUserDataURL"] ?? "", jsonData: fetchDataRequestJSON, responseFormat: .user)
+            query.Request(urlString: URLs["fetchUserDataURL"] ?? "", jsonData: fetchDataRequestJSON, jsonModel: FetchUserJSONModel.self, responseFormat: .user)
         }.done { (response : HTTPResponse) in
             guard let convertedResponse = (response as? UserDataResponse) else {
                 throw RuntimeError("Failed to connect to the Server")

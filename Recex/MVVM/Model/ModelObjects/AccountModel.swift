@@ -21,7 +21,7 @@ struct AccountModel {
         guard let emailRequestJSONData = try? JSONEncoder().encode(emailRequestJSON) else { return nil }
         var login : validationResponses = .none
         firstly{
-            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: emailRequestJSONData, responseFormat: .emailHash)
+            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: emailRequestJSONData, jsonModel: loginEmailVerificationAndSaltRetrievalJSONModel.self, responseFormat: .emailHash)
         }.compactMap(){  (response : HTTPResponse) in
             guard let convertedResponse = (response as? EmailHashHTTPResponse) else { throw RuntimeError("Could Not Get Response")}
             guard let salt = convertedResponse.salt else { throw Failure("Invalid Login Credentials"); }
@@ -30,7 +30,7 @@ struct AccountModel {
             let passwordRequestJSONData = try! JSONEncoder().encode(passwordRequestJSON)
             return passwordRequestJSONData
         }.then { (JSONData : Data) in
-             query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: JSONData, responseFormat: .withInfo)
+            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: JSONData, jsonModel: loginPasswordVerificationJSONModel.self, responseFormat: .withInfo)
         }.done { (response : HTTPResponse) in
             guard let convertedResponse = (response as? ResponseWithInfoHTTPResponse) else { throw RuntimeError("Could Not Get A Response") }
             user_cons.PersonID = convertedResponse.info
@@ -53,7 +53,7 @@ struct AccountModel {
         let registerRequestJSON = SignUpJSONModel(authentication_key: "_", request: requests[.signUp] ?? "", email: email, password: hashAndSalt[0], salt: hashAndSalt[1])
         guard let registerRequestJSONData = try? JSONEncoder().encode(registerRequestJSON) else { return .error }
         firstly {
-            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: registerRequestJSONData, responseFormat: .basic)
+            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: registerRequestJSONData, jsonModel: SignUpJSONModel.self, responseFormat: .basic)
         }.done { (response : HTTPResponse) in
             guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
             let verdict : validationResponses = {

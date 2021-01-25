@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SignUpJSONModel: Codable, Request {
+struct SignUpJSONModel: Codable, Request, Loopable {
     var authentication_key: String
     var request : String
     

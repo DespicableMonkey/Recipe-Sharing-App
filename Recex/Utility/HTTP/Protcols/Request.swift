@@ -6,7 +6,7 @@
 //
 
 import Foundation
-protocol Request : Codable {
+protocol Request : Codable, Loopable {
     var authentication_key : String { get set}
     var request : String { get set }
 }

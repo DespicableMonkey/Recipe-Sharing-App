@@ -15,6 +15,8 @@ class AddRecipeViewModel : ObservableObject{
     
     var user : User = .shared
     
+    let t = driver()
+    
     @Published var recipeTitle = ""
     @Published var description = ""
     @Published var difficulty = ""
@@ -66,13 +68,13 @@ class AddRecipeViewModel : ObservableObject{
         }
         for i in 0..<self.stepImages.count {
             if(!(stepImages[i] == UIImage())) {
-                stepImagesDictionary[self.stepImages[i]] = "step-image-/(i)"
+                stepImagesDictionary[self.stepImages[i]] = "step-image-\(i+1)"
             }
         }
-        let publishRecipeRequestJSON = PublishRecipeRequestJSON(authentication_key: "-", request: "publish", recipe_name: self.recipeTitle, recipe_description: self.description, difficulty: self.difficulty, cook_time: self.cookTime, servings: self.servings, ingredients: self.ingredients, steps: stepsDictionary, creater_id: user.PersonID, publishedTo: "PUBLIC")
+        let publishRecipeRequestJSON = PublishRecipeRequestJSON(authentication_key: "-", request: "publish", recipe_name: self.recipeTitle, recipe_description: self.description, difficulty: self.difficulty, cook_time: self.cookTime, servings: self.servings, ingredients: self.ingredients, steps: stepsDictionary, creator_id: user.PersonID, publishedTo: "PUBLIC")
         guard let publishRecipeRequestJSONData = try? JSONEncoder().encode(publishRecipeRequestJSON) else { return .error }
         firstly {
-            query.RequestWithImage(urlString: Database.URLs["publishRecipeURL"] ?? "", jsonData: publishRecipeRequestJSONData, responseFormat: .basic, imageData: stepImagesDictionary)
+            query.RequestWithImage(urlString: Database.URLs["publishRecipeURL"] ?? "", jsonData: publishRecipeRequestJSONData, jsonModel: PublishRecipeRequestJSON.self, responseFormat: .basic, imageData: stepImagesDictionary)
         }.done{ (response : HTTPResponse) in
             guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
             let verdict : validationResponses = {
@@ -95,7 +97,7 @@ class AddRecipeViewModel : ObservableObject{
     
 }
 
-fileprivate struct PublishRecipeRequestJSON : Request, Codable {
+fileprivate struct PublishRecipeRequestJSON : Request, Codable, Loopable  {
     var authentication_key: String
     
     
@@ -111,8 +113,66 @@ fileprivate struct PublishRecipeRequestJSON : Request, Codable {
     var ingredients: [String]
     var steps: [Int: String]
     
-    var creater_id : String
+    var creator_id : String
     var publishedTo : String
     
     
+}
+
+fileprivate struct testJSON : Request, Codable, Loopable  {
+    var authentication_key: String
+    
+    var request: String
+    
+    var d1 : [String] = ["a", "b"]
+    var d2 : [String : String] = ["a": "1", "b": "2"]
+    
+}
+
+class driver {
+    init() {
+        print("--starting--")
+        publishMediate()
+    }
+    func publishMediate() {
+            let _ = publishRecipe(completion: {
+                (response, error) in
+                if(error != nil ) {
+                    
+                } else {
+                    print("response")
+                    print(response)
+                    if response == .success {
+                        print("true")
+                    }
+                }
+            })
+    }
+    
+    func publishRecipe(completion: @escaping(validationResponses, _ error: Error?) -> (Void)) -> validationResponses {
+        let a = testJSON(authentication_key: "-", request: "request")
+        guard let b = try? JSONEncoder().encode(a) else { return .error }
+        let query = Query()
+        firstly {
+            query.Request(urlString: Database.URLs["publishRecipeURL"] ?? "", jsonData: b, jsonModel: testJSON.self, responseFormat: .basic)
+        }.done{ (response : HTTPResponse) in
+            guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
+            let verdict : validationResponses = {
+                switch(convertedResponse.result){
+                case "recipe_published": return .success
+                case "error" : return .error
+                default: return .error
+                }
+            }()
+            completion(verdict, nil)
+        }.catch { (error : Error) in
+            switch (error){
+            case is RuntimeError: completion(.error, error)
+            default: completion(.error, RuntimeError("Something Unknown Happened"))
+            }
+        }
+        return validationResponses.none
+        
+    }
+
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BasicWithInfoFourJSONModel : Request, Codable{
+struct BasicWithInfoFourJSONModel : Request, Codable, Loopable {
     var authentication_key: String
     var request: String
     var info_one : String

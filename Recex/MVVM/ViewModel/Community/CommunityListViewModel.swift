@@ -15,7 +15,6 @@ class CommunityListViewModel : ObservableObject {
     var query = Query()
     init() {
         communities = []
-        print(communities)
         for (id, community) in user.Communities {
             let url = ("https://recex.applications.pulkith.com/mobile/communities/fetchImage") + ("?authentication_key=ak&request=FetchImage&url=") + (community["Community_Image"] ?? "")
                 Images.fetchImage(from: url, completion: { image in
