@@ -11,7 +11,11 @@ import UIKit
 import Combine
 import PromiseKit
 
+
+/// View Object for the Login View PAge
 class CreateCommunityViewModel : ObservableObject {
+    
+    ///State Objects for the login view
     @Published var communityName = ""
     @Published var communityDescription = ""
     @Published var communityIsPublic = false
@@ -27,16 +31,21 @@ class CreateCommunityViewModel : ObservableObject {
     
     @Published var user : User = .shared
     
+    ///Allows for dismiss of create community page programatically
     var viewDismissalModePublisher = PassthroughSubject<Bool, Never>()
-    
-    var query = Query()
-    
     private var shouldPopView = false {
         didSet {
             viewDismissalModePublisher.send(shouldPopView)
         }
     }
     
+    ///make an object of the query class to send queries to server
+    var query = Query()
+
+    /**
+     Create the community once the button is pressed, if all requirements are satisfied send the query to the server, otherwise tell the user what they are missing
+     
+     */
     func validateCreation() {
         self.alertTxt = ""
         if(communityName.trim().count < 3) {
@@ -46,21 +55,39 @@ class CreateCommunityViewModel : ObservableObject {
         } else if (communityImage == UIImage()) {
             self.alertTxt = "Community must have an image"
         } else {
+            //all requirements are satisfied
             self.createCommunityMediate()
         }
-         self.isLoading = false
+        
     }
+    /// Function to house the completion handler after query is sent
     func createCommunityMediate() {
+        self.isLoading = true
+        //call query function
         let _ = createCommunity(completion: {
             (response, error) in
+            self.isLoading = false
             if(error != nil ) {
             } else {
+                //Community was sucessfully created
+                //refetchData to get the community added
                 self.user.fetchData()
+                ///close the create community view
                 self.shouldPopView = true
             }
         })
         
     }
+    
+    
+    /**
+     Returns a validationResponse as to wether the community was successfuly created
+     
+     - Parameters:
+        - completion: called when the query is completed, or an error is throw
+     - Returns:
+        - validationResponses: wether the function successfuly queried the request
+     */
     func createCommunity(completion: @escaping(validationResponses, _ error: Error?) -> (Void)) -> validationResponses {
 //        guard let imgData : Data = (self.communityImage.pngData()) else { return .error }
 //        let imgString : String = String(decoding: imgData, as: UTF8.self)

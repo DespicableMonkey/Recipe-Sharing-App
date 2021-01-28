@@ -10,8 +10,9 @@ import Foundation
 
 struct IngredientView: View {
     
-    @Binding var ingredient : Ingredient
-    @Binding var ingredients : [Ingredient]
+    @State var ingredient : IngredientSimplified
+    @Binding var ingredients : [IngredientSimplified]
+    var group : String
     
     var body: some View {
         ZStack {
@@ -46,7 +47,15 @@ struct IngredientView: View {
                         
                         Spacer(minLength: 0)
                         
-                        Button(action: { if ingredient.quantity > 1 {ingredient.quantity -= 1}}){
+                        Button(action: {
+                                if ingredient.quantity > 1 {
+                                    if var dict = AS.retrieve(for: group) as? [String: Double] {
+                                        dict[ingredient.name]? += 1
+                                        AS.set(for: group, dict)
+                                        ingredient.quantity -= 1
+                                    } else { return }
+                                }
+                        }){
                             Image(systemName: "minus")
                                 .font(.system(size: 16, weight: .heavy))
                                 .foregroundColor(.black)
@@ -59,7 +68,13 @@ struct IngredientView: View {
                             .padding(.horizontal, 10)
                             .background(Color.black.opacity(0.06))
                         
-                        Button(action: {ingredient.quantity += 1}){
+                        Button(action: {
+                            if var dict = AS.retrieve(for: group) as? [String: Double] {
+                                dict[ingredient.name]? += 1
+                                AS.set(for: group, dict)
+                                ingredient.quantity += 1
+                            } else { return }
+                        }){
                             Image(systemName: "plus")
                                 .font(.system(size: 16, weight: .heavy))
                                 .foregroundColor(.black)
@@ -117,6 +132,10 @@ struct IngredientView: View {
     }
     
     func deleteIngredient(){
+        if var dict = AS.retrieve(for: group) as? [String: Double] {
+            dict.removeValue(forKey: ingredient.name)
+            AS.set(for: group, dict)
+        } else { return }
         ingredients.removeAll { (ingredient) -> Bool in
             return self.ingredient.id == ingredient.id
         }

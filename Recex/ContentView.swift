@@ -10,23 +10,13 @@ import CommonCrypto
 import PromiseKit
 
 struct ContentView: View {
-    
-    @AppStorage("log_Status") var status = false
     @StateObject var model = ModelData()
     
     var body: some View {
         
         ZStack{
-            
-            if status{
-                
-                VStack(spacing: 25){
-                }
-            }
-            else{
-                
+            //open the login view
                 LoginView(model: model)
-            }
         }
     }
 }

@@ -13,6 +13,7 @@ struct IngredientSearchView: View {
     @State private var isEditing  = false
     
     @StateObject var model = IngredientsViewModel()
+    var target : String
     
     var body: some View {
         
@@ -23,6 +24,7 @@ struct IngredientSearchView: View {
                     .font(.title)
                     .padding(.leading, 10)
                     .foregroundColor(.black)
+                    .onAppear(){ self.model.target = self.target}
                 Spacer()
                 Image(systemName: "multiply.circle.fill")
                     .onTapGesture {
@@ -86,7 +88,7 @@ struct IngredientSearchView: View {
             HStack {
                 VStack (spacing: 0){
                     List(model.searchIngredients()) { ingredient in
-                        IngredientSearchResultView(ingredient: .constant(ingredient), selected: .constant((true)))
+                        IngredientSearchResultView(ingredient: ingredient, model: model, target: self.model.target)
                         }
                     .padding(.top)
                 }
@@ -102,47 +104,51 @@ struct IngredientSearchView: View {
 
 
 struct IngredientSearchResultView : View {
-     @Binding var ingredient : Ingredient
-     @Binding var selected : Bool
+    var ingredient : Ingredient
+     @ObservedObject var model :IngredientsViewModel
     
-        @State var checked =  false
+        @State var checked : Bool = false
         @State var trimVal : CGFloat = 0
         @State var width : CGFloat = 70
         @State var removeText = false
 
     
-    init(ingredient : Binding<Ingredient>, selected : Binding<Bool>) {
-        self._ingredient = ingredient
-        self._selected = selected
-        
-        if ( true) {
-            self.checked.toggle()
-        }
-    }
+    let target : String
     var body : some View {
         
-
+                //checked -> current state of the checkbox.
                 Button(action: {
-                        if !self.checked {
-                            self.removeText.toggle()
-                            withAnimation() {
+                }) {
+                    HStack {
+                    AnimatedCheckMarkView(checked: $checked, trimVal: $trimVal, width: $width, removeText: $removeText)
+                        .onAppear() {
+                                self.checked = model.containsValue(for: target, ingredient: self.ingredient.name)
+                                self.removeText = checked ? true : false
+                                self.trimVal = checked ? 1 : 0
                                 self.width = 70
+                        }
+                        .onTapGesture {
+                            if(self.checked) {
+                                model.updateList(for: target, ingredient: self.ingredient.name, action: false)
+                            } else {
+                                model.updateList(for: target, ingredient: self.ingredient.name, action: true)
                             }
-                            withAnimation(Animation.easeIn(duration: 0.3)) {
-                                self.trimVal = 1
-                                self.checked.toggle()
-                            }
-                        } else {
-                            withAnimation() {
+                            if(!self.checked) {
+                                self.removeText.toggle()
+                                withAnimation{
+                                    self.width = 70
+                                }
+                                withAnimation(Animation.easeIn(duration: 0.7)) {
+                                    self.trimVal = 7
+                                    self.checked.toggle()
+                                }
+                            } else {
                                 self.trimVal = 0
                                 self.width = 70
                                 self.checked.toggle()
                                 self.removeText.toggle()
                             }
                         }
-                }) {
-                    HStack {
-                    AnimatedCheckMarkView(checked: $checked, trimVal: $trimVal, width: $width, removeText: $removeText)
                     Text(ingredient.name)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
@@ -155,9 +161,3 @@ struct IngredientSearchResultView : View {
                 .padding([.leading, .trailing], 10)
     }
 }
-struct IngredientSearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        IngredientSearchView()
-    }
-}
-

@@ -58,7 +58,7 @@ struct HomeView: View {
                         }
                     }
                 }
-                .padding()
+                
             }
             .background(Color.black.opacity(0.02).ignoresSafeArea(.all, edges: .all))
         }

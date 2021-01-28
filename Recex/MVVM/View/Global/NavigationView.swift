@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SPAlert
 
 //
 //  NavigationViews.swift
@@ -31,13 +31,15 @@ struct NavigationController: View {
     
     @State var PresentNewRecipe = false
     @State var logout = false
-    
+    @State var openMoreInfo = false
     
     init(){
-        user_cons.PersonID = UserDefaults.standard.string(forKey: "PersonID") ?? "-1"
+        user_cons.PersonID = AS.retrieve(for: "PersonID") as! String
         user = User(PersonID: user_cons.PersonID)
         UITabBar.appearance().isHidden = true
+        
     }
+
     //                .onTapGesture {
     //                    if(show == true) { self.show.toggle() }
     //                }
@@ -48,7 +50,8 @@ struct NavigationController: View {
             if(self.logout) {
                 LoginView()
             } else {
-                    VStack (spacing : 0){
+                    ZStack{
+                        VStack (spacing : 0){
 
                             VStack {
                                 ZStack {
@@ -62,17 +65,26 @@ struct NavigationController: View {
                                                 .resizable()
                                                 .frame(width: 25, height: 25)
                                         }
+                                        .onAppear() {
+                                            if(!((AS.retrieve(for: "FinishedSignUp") as? Bool)!)) {
+                                                self.openMoreInfo = true
+                                            }
+                                        }
+                                        .fullScreenCover(isPresented: self.$openMoreInfo, content: {
+                                            FinishSignUpView()
+                                        })
                                         Spacer()
                                     }
                                     Text("\(selected)")
                                         .font(.title)
-                                        .font(.system(size: 16, weight: .bold))
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 18, weight: .bold))
                                         .foregroundColor(Color("ColorThemeMain"))
                                     
                                     HStack {
                                         Spacer()
                                         Button(action: {
-                                            
+                                            self.PresentNewRecipe.toggle()
                                         }) {
                                             Image(systemName: "plus.square")
                                                 .resizable()
@@ -80,110 +92,118 @@ struct NavigationController: View {
                                                 .fullScreenCover(isPresented: self.$PresentNewRecipe){
                                                     CreateRecipeView()
                                                 }
-                                                .onTapGesture {
-                                                    self.PresentNewRecipe.toggle()
-                                                }
                                         }
-                                       
+                                        
                                     }
                                     
                                 }
                                 .padding()
-                                .padding(.top,0)
-                                .padding(.bottom, 0)
+                                .padding(.top,UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 0 : 15)
+                                .padding(.bottom)
                                 .foregroundColor(.primary)
                                 .overlay(Rectangle().stroke(Color.primary.opacity(0.1), lineWidth: 1).shadow(radius: 3).edgesIgnoringSafeArea(.top))
                                 //background(Color("ColorThemeMain"))
                                 
                                 
                             }
-                           
-                        
-                        
-                        TabView(selection: $selected){
-                            HomeView()
-                                .tag(tabItems[0])
-                                .ignoresSafeArea(.all, edges: .top)
-                                .navigationBarTitle("") //this must be empty
-                                .navigationBarHidden(true)
-                                .navigationBarBackButtonHidden(true)
-                            Color.blue
-                                .tag(tabItems[1])
-                                .ignoresSafeArea(.all, edges: .top)
-                                .navigationBarTitle("") //this must be empty
-                                .navigationBarHidden(true)
-                                .navigationBarBackButtonHidden(true)
-                            CommunityListView()
-                                .tag(tabItems[2])
-                                .ignoresSafeArea(.all, edges: .top)
-                                .navigationBarTitle("") //this must be empty
-                                .navigationBarHidden(true)
-                                .navigationBarBackButtonHidden(true)
-                            PantryView()
-                                .tag(tabItems[3])
-                                .ignoresSafeArea(.all, edges: .top)
-                                .navigationBarTitle("") //this must be empty
-                                .navigationBarHidden(true)
-                                .navigationBarBackButtonHidden(true)
-                            Color.green
-                                .tag(tabItems[4])
-                                .ignoresSafeArea(.all, edges: .top)
-                                .navigationBarTitle("") //this must be empty
-                                .navigationBarHidden(true)
-                                .navigationBarBackButtonHidden(true)
-                        }
-                        .navigationBarTitle("") //this must be empty
-                        .navigationBarHidden(true)
-                        .navigationBarBackButtonHidden(true)
-                        HStack(spacing: 0){
+                            .padding(.bottom)
                             
-                            ForEach(tabItems,id: \.self){value in
-                                
-                                GeometryReader{reader in
-                                    
-                                    TabBarButton(selected: $selected, value: value, image: tabItemIcons[tabItems.firstIndex(of: value) ?? 0], centerX: $centerX, rect: reader.frame(in: .global))
-                                        // setting First Intial Curve...
-                                        .onAppear(perform: {
-                                            
-                                            if value == tabItems.first{
-                                                centerX = reader.frame(in: .global).midX
-                                            }
-                                        })
-                                }
-                                .frame(width: 70, height: 50)
-                                
-                                if value != tabItems.last{Spacer(minLength: 0)}
+                            
+                            TabView(selection: $selected){
+                                HomeView()
+                                    .tag(tabItems[0])
+                                    .ignoresSafeArea(.all, edges: .top)
+                                    .navigationBarTitle("") //this must be empty
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                                ExploreView()
+                                    .tag(tabItems[1])
+                                    .ignoresSafeArea(.all, edges: .top)
+                                    .navigationBarTitle("") //this must be empty
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                                CommunityListView()
+                                    .tag(tabItems[2])
+                                    .ignoresSafeArea(.all, edges: .top)
+                                    .navigationBarTitle("") //this must be empty
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                                PantryView()
+                                    .tag(tabItems[3])
+                                    .ignoresSafeArea(.all, edges: .top)
+                                    .navigationBarTitle("") //this must be empty
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                                Color.green
+                                    .tag(tabItems[4])
+                                    .ignoresSafeArea(.all, edges: .top)
+                                    .navigationBarTitle("") //this must be empty
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
                             }
+                            .navigationBarTitle("") //this must be empty
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true)
+                            
+                            
+                            HStack(spacing: 0){
+                                
+                                ForEach(tabItems,id: \.self){value in
+                                    
+                                    GeometryReader{reader in
+                                        
+                                        TabBarButton(selected: $selected, value: value, image: tabItemIcons[tabItems.firstIndex(of: value) ?? 0], centerX: $centerX, rect: reader.frame(in: .global))
+                                            // setting First Intial Curve...
+                                            .onAppear(perform: {
+                                                
+                                                if value == tabItems.first{
+                                                    centerX = reader.frame(in: .global).midX
+                                                }
+                                            })
+                                    }
+                                    .frame(width: 70, height: 50)
+                                    
+                                    if value != tabItems.last{Spacer(minLength: 0)}
+                                }
+                            }
+                            .padding(.horizontal,25)
+                            .padding(.top) // For Smaller Size iPhone Padding Will be 15 And For Notch Phones No Padding
+                            .padding(.bottom,UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 15 : 30)
+                            .background(Color.white.clipShape(AnimatedShape(centerX: centerX)))
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -5)
+                            
+                            
+                            
+                            
                         }
-                        .padding(.horizontal,25)
-                        .padding(.top)
-                        // For Smaller Size iPhone Padding Will be 15 And For Notch Phones No Padding
-                        
-                        // (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
-                        .padding(.bottom,UIApplication.shared.windows.first?.safeAreaInsets.bottom == 0 ? 15 : 0)
-                        .background(Color.white.clipShape(AnimatedShape(centerX: centerX)))
-                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -5)
-                        .padding(.top, -15)
+                        .padding(.vertical)
+                        HStack {
+                            Menu(dark: self.$dark, show: self.$show, logout: self.$logout)
+                                .preferredColorScheme(self.dark ? .dark : .light)
+                                .offset(x: self.show ? 0 : -UIScreen.main.bounds.width / 1.5)
+                            
+                            Spacer(minLength: 0)
+                            
+                        }
+                        .edgesIgnoringSafeArea([.top, .bottom])
+                        .background(Color.primary.opacity(self.show ? (self.dark ? 0.05 : 0.2) : 0).edgesIgnoringSafeArea(.all))
+                        .padding(.vertical)
                         
                     }
+                    .padding(.vertical)
                     
-                    HStack {
-                        Menu(dark: self.$dark, show: self.$show, logout: self.$logout)
-                            .preferredColorScheme(self.dark ? .dark : .light)
-                            .offset(x: self.show ? 0 : -UIScreen.main.bounds.width / 1.5)
-                        
-                        Spacer(minLength: 0)
-                        
-                    }
-                    .edgesIgnoringSafeArea([.top, .bottom])
-                    .background(Color.primary.opacity(self.show ? (self.dark ? 0.05 : 0.2) : 0).edgesIgnoringSafeArea(.all))
             }
             
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
+struct NavigationController_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationController()
+            .previewDevice("iPhone 12 Pro Max")
+    }
+}
 struct TabBarButton : View {
     
     @Binding var selected : String
@@ -256,8 +276,6 @@ struct Menu : View {
     
     var body : some View {
         VStack {
-        
-            
             ScrollView(.vertical, showsIndicators: false) {
                 HStack {
                     Button(action: {
@@ -270,6 +288,7 @@ struct Menu : View {
                             .frame(width: 35, height: 35)
                     }
                     Spacer()
+                    
                     
                     Button(action: {
                         
@@ -431,11 +450,10 @@ struct Menu : View {
                 }
                 .padding(.bottom, 75)
             }
-            
         }
         .foregroundColor(.primary)
         .padding(.horizontal, 20)
-        .frame(width: UIScreen.main.bounds.width / 1.5)
+        .frame(width: UIScreen.main.bounds.width / 1.5, height: UIScreen.main.bounds.height)
         .background(self.dark ? Color.black : Color.white).edgesIgnoringSafeArea(.all)
         .overlay(Rectangle().stroke(Color.primary.opacity(0.2), lineWidth: 2).shadow(radius: 3).edgesIgnoringSafeArea(.all))
         .edgesIgnoringSafeArea([.top, .bottom])

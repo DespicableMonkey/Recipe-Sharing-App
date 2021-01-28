@@ -44,4 +44,3 @@ struct AnimatedCheckMarkView: View {
         }
     }
 }
-//.id(UUID())

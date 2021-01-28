@@ -217,10 +217,13 @@ struct Query {
         for(key, value) in params {
              var keyAsData = Data()
                 if value is String { keyAsData = try! encoder.encode(value as! String) }
-                else if value is [Any] { keyAsData = try! encoder.encode(value as! [String]) }
+                else if value is [Any] { keyAsData = try! encoder.encode((value as! [String]))}
                 else if value is [String: String] { keyAsData = try! encoder.encode(value as! [String: String])}
                 else if value is [String: [String: String]] {keyAsData = try! encoder.encode(value as! [String: [String: String]])}
-            let jsonParamater = (String(data: keyAsData, encoding: .utf8) ?? "").replacingOccurrences(of: "\"", with: "")
+            var jsonParamater = (String(data: keyAsData, encoding: .utf8) ?? "")
+            if value is String {
+                jsonParamater = jsonParamater.replacingOccurrences(of: "\"", with: "")
+            }
             
             body.appendString(string: "--\(boundary)\r\n")
             body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(key)\"\r\n\r\n")
@@ -263,16 +266,20 @@ struct Query {
         for(key, value) in params {
              var keyAsData = Data()
                 if value is String { keyAsData = try! encoder.encode(value as! String) }
-                else if value is [Any] { keyAsData = try! encoder.encode(value as! [String]) }
+                else if value is [Any] { keyAsData = try! encoder.encode((value as! [String]))}
                 else if value is [String: String] { keyAsData = try! encoder.encode(value as! [String: String])}
                 else if value is [String: [String: String]] {keyAsData = try! encoder.encode(value as! [String: [String: String]])}
-            let jsonParamater = (String(data: keyAsData, encoding: .utf8) ?? "").replacingOccurrences(of: "\"", with: "")
+            var jsonParamater = (String(data: keyAsData, encoding: .utf8) ?? "")
+            if value is String {
+                jsonParamater = jsonParamater.replacingOccurrences(of: "\"", with: "")
+            }
             
             body.appendString(string: "--\(boundary)\r\n")
             body.appendString(string: "Content-Disposition: multipart/form-data; name=\"\(key)\"\r\n\r\n")
             body.appendString(string: "\(jsonParamater)\r\n")
         }
         body.appendString(string: "--\(boundary)--\r\n")
+        
       return body
     }
     func generateBoundaryString() -> String {

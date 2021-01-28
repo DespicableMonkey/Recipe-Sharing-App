@@ -10,12 +10,11 @@ import SwiftUI
 import UIKit
 import PromiseKit
 import Combine
+import SPAlert
 
 class AddRecipeViewModel : ObservableObject{
     
     var user : User = .shared
-    
-    let t = driver()
     
     @Published var recipeTitle = ""
     @Published var description = ""
@@ -42,15 +41,13 @@ class AddRecipeViewModel : ObservableObject{
     
     func publishMediate() {
         if((recipeTitle.length > 0 && description.length > 0 && servings.length > 0 && difficulty.length > 0 && cookTime.length > 0 && ingredients.count > 0 && ingredients[0].length > 0 && steps.count > 0 && steps[0].length > 0)){
-            print("hit")
             let _ = publishRecipe(completion: {
                 (response, error) in
                 if(error != nil ) {
                     
                 } else {
-                    print("response")
-                    print(response)
                     if response == .success {
+                        SPAlert.present(title: "Recipe Published!", preset: .done)
                         self.shouldPopView = true
                     }
                 }
@@ -61,10 +58,10 @@ class AddRecipeViewModel : ObservableObject{
     }
     
     func publishRecipe(completion: @escaping(validationResponses, _ error: Error?) -> (Void)) -> validationResponses {
-        var stepsDictionary : [Int : String] = [:]
+        var stepsDictionary : [String : String] = [:]
         var stepImagesDictionary : [UIImage: String] = [:]
         for i in 0..<self.steps.count {
-            stepsDictionary[i+1] = self.steps[i]
+            stepsDictionary["\(i+1)"] = self.steps[i]
         }
         for i in 0..<self.stepImages.count {
             if(!(stepImages[i] == UIImage())) {
@@ -95,84 +92,4 @@ class AddRecipeViewModel : ObservableObject{
         
     }
     
-}
-
-fileprivate struct PublishRecipeRequestJSON : Request, Codable, Loopable  {
-    var authentication_key: String
-    
-    
-    var request: String
-    
-    //php/js stytle variable names
-    var recipe_name: String
-    var recipe_description: String
-    var difficulty: String
-    var cook_time: String
-    var servings: String
-    
-    var ingredients: [String]
-    var steps: [Int: String]
-    
-    var creator_id : String
-    var publishedTo : String
-    
-    
-}
-
-fileprivate struct testJSON : Request, Codable, Loopable  {
-    var authentication_key: String
-    
-    var request: String
-    
-    var d1 : [String] = ["a", "b"]
-    var d2 : [String : String] = ["a": "1", "b": "2"]
-    
-}
-
-class driver {
-    init() {
-        print("--starting--")
-        publishMediate()
-    }
-    func publishMediate() {
-            let _ = publishRecipe(completion: {
-                (response, error) in
-                if(error != nil ) {
-                    
-                } else {
-                    print("response")
-                    print(response)
-                    if response == .success {
-                        print("true")
-                    }
-                }
-            })
-    }
-    
-    func publishRecipe(completion: @escaping(validationResponses, _ error: Error?) -> (Void)) -> validationResponses {
-        let a = testJSON(authentication_key: "-", request: "request")
-        guard let b = try? JSONEncoder().encode(a) else { return .error }
-        let query = Query()
-        firstly {
-            query.Request(urlString: Database.URLs["publishRecipeURL"] ?? "", jsonData: b, jsonModel: testJSON.self, responseFormat: .basic)
-        }.done{ (response : HTTPResponse) in
-            guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
-            let verdict : validationResponses = {
-                switch(convertedResponse.result){
-                case "recipe_published": return .success
-                case "error" : return .error
-                default: return .error
-                }
-            }()
-            completion(verdict, nil)
-        }.catch { (error : Error) in
-            switch (error){
-            case is RuntimeError: completion(.error, error)
-            default: completion(.error, RuntimeError("Something Unknown Happened"))
-            }
-        }
-        return validationResponses.none
-        
-    }
-
 }

@@ -1,28 +1,25 @@
 //
-//  NeededIngredientsViewModel.swift
+//  OwnedIngredientsViewModel.swift
 //  Recex
 //
-//  Created by Pulkith Paruchuri on 12/2/20.
+//  Created by Pulkith Paruchuri on 1/28/21.
 //
 
 import Foundation
-import SwiftUI
-
-class NeededIngredientsViewModel: ObservableObject {
+class OwnedIngredientsViewModel: ObservableObject {
     
-    //gets the list of ingredients from the search query
+    //getds the list of ingredients from the search query
     @Published var ingredients : [IngredientSimplified] = []
     
     init() {
         self.getIngredients()
     }
-    
     /**
-     Search for Ingredients and put them in the results list for needed ingredients
+     Search for Ingredients and put them in the results list for owned ingredients
      */
     func getIngredients() {
         ingredients = []
-        if let dict = (AS.retrieve(for: "needed_ingredients") as? [String: Double]) {
+        if let dict = (AS.retrieve(for: "owned_ingredients") as? [String: Double]) {
             for(name, amount) in dict {
                 ingredients.append(IngredientSimplified(name: name, quantity: amount, offset: 0))
             }

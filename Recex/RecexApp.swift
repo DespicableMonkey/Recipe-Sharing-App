@@ -8,13 +8,15 @@
 import SwiftUI
 import PromiseKit
 
+//Main starting view for the app
 @main
 struct RecexApp: App {
     let persistenceController = PersistenceController.shared
 
+    //opens the main view of the app
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

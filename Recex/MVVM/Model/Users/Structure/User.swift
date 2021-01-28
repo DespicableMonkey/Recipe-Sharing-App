@@ -85,6 +85,13 @@ class User : Identifiable, Person, ObservableObject {
     }
     
     func fetchData() {
+        fetchDataWithCompletion {
+            return
+        }
+    }
+    
+    func fetchDataWithCompletion(_ completion: @escaping() ->(Void)) -> (Void) {
+        print("---Fetching---")
         let _ = queryData(completion: {
             (response, error) in
             if(error != nil ) {
@@ -97,12 +104,16 @@ class User : Identifiable, Person, ObservableObject {
                 user.Email = userData.Email
                 user.Creation = userData.Created
                 user.Communities = userData.Communities
-                
+                print("Fetched for \(user.PersonID)")
+                completion()
             }
         })
     }
+    
     func queryData ( completion: @escaping(HTTPResponse, _ _error: Error?) -> (Void)) -> validationResponses? {
-        let fetchDataRequestJ =  FetchUserJSONModel(authentication_key: "-", request: requests[.user] ?? "", ID: "\(user_cons.PersonID)")
+        print("---fetching---")
+        let id = AS.retrieve(for: "PersonID") as! String
+        let fetchDataRequestJ =  FetchUserJSONModel(authentication_key: "-", request: requests[.user] ?? "", ID: "\(id)")
         guard let fetchDataRequestJSON = try? JSONEncoder().encode(fetchDataRequestJ) else { return nil }
 
         firstly {

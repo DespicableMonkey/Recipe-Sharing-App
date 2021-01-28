@@ -15,7 +15,21 @@ struct InviteFriends: View {
     
     
     @StateObject var model = InviteFriendsViewModel()
+    
+    var target = "friends"
+    var link = ""
+    
+    //default init for friends
+    init() {
+    }
+    init(community : Community) {
+        self.target = "community"
+        self.link = community.joinLink
+       
+    }
+    
     var body: some View {
+        NavigationView {
             VStack{
                 HStack{
                     
@@ -25,6 +39,12 @@ struct InviteFriends: View {
                         .padding(.trailing, 20)
                         .onTapGesture(count: 1){
                             self.presentationmode.wrappedValue.dismiss()
+                        }
+                        .onAppear() {
+                            if(self.target == "community") {
+                                self.model.ShareableLink = self.link
+                            }
+                            model.generateQR()
                         }
                     
                     Text("Invite Friends")
@@ -114,5 +134,10 @@ struct InviteFriends: View {
                 
                 
             }.ignoresSafeArea(.all, edges: .bottom)
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            
+        }
     }
 }

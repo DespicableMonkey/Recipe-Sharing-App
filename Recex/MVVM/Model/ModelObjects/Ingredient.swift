@@ -16,8 +16,5 @@ struct Ingredient: Identifiable {
     
     var image : String?
     
-    var offset: CGFloat
-    var isSwiped = false
-    
     
 }

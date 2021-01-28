@@ -10,6 +10,7 @@ import Foundation
 class PantryViewModel {
     let user : User
     
+    //sets the user
     init(user: User){
         self.user = user
     }

@@ -48,28 +48,35 @@ struct BottomSheetView<Content: View>: View {
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                self.indicator.padding()
-                self.content
-            }
-            .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(Constants.radius)
-            .frame(height: geometry.size.height, alignment: .bottom)
-            .offset(y: max(self.offset + self.translation, 0))
-            .animation(.interactiveSpring())
-            .gesture(
-                DragGesture().updating(self.$translation) { value, state, _ in
-                    state = value.translation.height
-                }.onEnded { value in
-                    let snapDistance = self.maxHeight * Constants.snapRatio
-                    guard abs(value.translation.height) > snapDistance else {
-                        return
-                    }
-                    self.isOpen = value.translation.height < 0
+        ZStack {
+            Color.gray.opacity(self.isOpen ? 0.3 : 0).ignoresSafeArea(.all).edgesIgnoringSafeArea(.all)
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    Divider()
+                    self.indicator.padding()
+                        .background(Color(.secondarySystemBackground))
+                        .frame(width: geometry.size.width)
+                    self.content
+                        .background(Color.white)
                 }
-            )
+                .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
+                .background(Color.white)
+                .cornerRadius(Constants.radius)
+                .frame(height: geometry.size.height, alignment: .bottom)
+                .offset(y: max(self.offset + self.translation, 0))
+                .animation(.interactiveSpring())
+                .gesture(
+                    DragGesture().updating(self.$translation) { value, state, _ in
+                        state = value.translation.height
+                    }.onEnded { value in
+                        let snapDistance = self.maxHeight * Constants.snapRatio
+                        guard abs(value.translation.height) > snapDistance else {
+                            return
+                        }
+                        self.isOpen = value.translation.height < 0
+                    }
+                )
+            }
         }
     }
 }

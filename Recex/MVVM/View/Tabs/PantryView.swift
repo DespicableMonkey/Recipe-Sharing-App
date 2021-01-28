@@ -11,7 +11,8 @@ struct PantryView: View {
     
     @ObservedObject var user: User = .shared
 
-    @State var openNeeded = false 
+    @State var openNeeded = false
+    @State var openOwned = false
     init() {
         //Testing
         
@@ -50,7 +51,7 @@ struct PantryView: View {
             
             HStack{
                 Button(action: {
-                    
+                    self.openOwned.toggle()
                 }) {
                     Text("Owned Ingredients")
                         .font(.system(size: 30, weight: .bold))
@@ -74,6 +75,8 @@ struct PantryView: View {
                     .stroke(Color.blue, lineWidth: 2)
             )
             .padding(.bottom, 30)
+            .fullScreenCover(isPresented: self.$openOwned
+                             , content: { OwnedIngredientsView() })
             
 
            

@@ -1,4 +1,5 @@
 import SwiftUI
+import MobileCoreServices
 
 struct CommunityView: View {
     // For Dark Mode Adoption....
@@ -6,11 +7,10 @@ struct CommunityView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     
-    @ObservedObject var model : CommunityViewModel = CommunityViewModel(community: Community(id: "", userIsIn: false, isPublic: false, joinCode: "", joinLink: "", name: "", description: "", image: UIImage(), participants: 0, chiefCook: "", notifications: 0))
+    @ObservedObject var model : CommunityViewModel = CommunityViewModel(community: Community(id: "", userIsIn: false, isPublic: false, joinCode: "", name: "", description: "", image: UIImage(), participants: 0, chiefCook: "", notifications: 0))
     
     init(community : Community) {
         self.model.community = community
-        print(community)
     }
     
     var body: some View {
@@ -34,7 +34,7 @@ struct CommunityView: View {
                         
                         return AnyView(
                             
-                            Image("TestImage1")
+                            Image(uiImage: self.model.community.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: UIScreen.main.bounds.width, height: 250 + (offset > 0 ? offset : 0))
@@ -42,17 +42,13 @@ struct CommunityView: View {
                                 .offset(y: (offset > 0 ? -offset : 0))
                                 .overlay(
                                     HStack{
-                                        Button(action: {presentationMode.wrappedValue.dismiss() }, label: {
+                                        Button(action: { presentationMode.wrappedValue.dismiss() }, label: {
                                             Image(systemName: "arrow.left")
-                                                .font(.system(size: 20, weight: .bold))
+                                                .font(.system(size: 30, weight: .bold))
                                                 .foregroundColor(.white)
                                         })
+                                        .padding()
                                         Spacer()
-                                        Button(action: {}, label: {
-                                            Image(systemName: "suit.heart.fill")
-                                                .font(.system(size: 20, weight: .bold))
-                                                .foregroundColor(.white)
-                                        })
                                     }
                                     .padding(),
                                     alignment: .top
@@ -61,9 +57,14 @@ struct CommunityView: View {
                     }
                     .frame(height: 250)
                     // Posts
-                    Section(header: CommunityHeaderView(community: $model.community)) {
-                        ForEach(model.posts) { recipe in
-                            RecipePost(recipe: recipe)
+                    Section(header: CommunityHeaderView(community: $model.community).padding([.trailing])) {
+                        if(model.loading) { InBuiltLoadingView(animation: true, size: 125)}
+                        else {
+                            ForEach(model.posts) { recipe in
+                                RecipePost(recipe: recipe)
+                                    
+                            }
+                            .padding()
                         }
                         
                     }
@@ -92,7 +93,11 @@ struct CommunityView: View {
                     
                     Divider()
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        UIPasteboard.general.setValue(model.community.joinLink,
+                                   forPasteboardType: kUTTypePlainText as String)
+                        self.model.inviteSheetOpen.toggle()
+                    }, label: {
                         Text("Copy Link")
                             .padding([.top, .bottom], 8)
                             .padding([.trailing, .leading], 15)
@@ -103,7 +108,11 @@ struct CommunityView: View {
                     })
                     
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        self.model.inviteSheetOpen.toggle()
+                        self.model.openQRCode.toggle()
+                        
+                    }, label: {
                         Text("QR Code")
                             .padding([.top, .bottom], 8)
                             .padding([.trailing, .leading], 15)
@@ -118,6 +127,9 @@ struct CommunityView: View {
             .navigationTitle("")
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
+            .sheet(isPresented: $model.openQRCode, content: {
+                InviteFriends(community: self.model.community)
+            })
     }
 }
 struct CommunityHeaderView: View {
@@ -142,18 +154,20 @@ struct CommunityHeaderView: View {
                 .padding([.top], 30)
                 .padding(.bottom, 15)
                 
+                
                 Text(community.name)
                     .font(.title)
                     .fontWeight(.bold)
                     .padding([.top], 30)
                     .padding(.bottom, 15)
+                    .padding(.trailing)
                 
                 if(model.offset > 250){
                     Spacer()
                 }
             }
             .background(model.offset <= 250 ? Color.clear : scheme == .dark ? Color.black : Color.white)
-            .frame(width: UIScreen.main.bounds.width)
+            .padding([.top, .trailing])
             
             
             if model.offset > 250{
@@ -186,6 +200,7 @@ struct CommunityHeaderView: View {
                             .offset(x: 20)
                             
                         }
+                        .padding([.trailing])
                         
                         Divider()
                         
@@ -196,7 +211,7 @@ struct CommunityHeaderView: View {
                                 
                                 Text("Create Post")
                                     .foregroundColor(Color.white)
-                                    .font(.title3)
+                                    .font(.headline)
                                     .fontWeight(.bold)
                                     .padding([.top, .bottom], 8)
                                     .padding([.leading, .trailing], 15)
@@ -206,9 +221,9 @@ struct CommunityHeaderView: View {
                             })
                             
                             Button(action: {}, label: {
-                                Text("Ask For Inspiration")
+                                Text("Ask for Inspiration")
                                     .foregroundColor(Color.white)
-                                    .font(.title3)
+                                    .font(.headline)
                                     .fontWeight(.bold)
                                     .padding([.top, .bottom], 8)
                                     .padding([.leading, .trailing], 15)
@@ -217,19 +232,24 @@ struct CommunityHeaderView: View {
                                     .cornerRadius(10)
                             })
                         }
-                        .frame(width: UIScreen.main.bounds.width)
+                        .padding([.trailing])
                         
                         Divider()
                     })
                     .opacity(model.offset > 200 ? 1 - Double((model.offset - 200) / 50) : 1)
-                    .frame(maxWidth: .infinity,alignment: .center)
+                    .padding(.trailing)
+                    
                 }
                 .frame(height: 150)
+                .padding(.trailing)
+                
+                
             }
             
             Spacer()
         }
         .padding(.horizontal)
+        .padding(.trailing)
         .frame(height:  200)
         .background(model.offset > 250 ? Color.clear : scheme == .dark ? Color.black : Color.white)
     }

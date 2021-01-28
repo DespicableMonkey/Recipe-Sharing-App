@@ -11,7 +11,7 @@ import UIKit
 final class Images {
     private init(){}
     
-    static func fetchImage(from url: String, completion: @escaping(UIImage?) -> (Void)) -> (Void){
+    static func fetchImage(from url: String, data : String, dataIndex: Int, completion: @escaping(UIImage?, String?, Int?) -> (Void)) -> (Void){
         guard let imageURL = URL(string: url) else { return }
 
             // just not to cause a deadlock in UI!
@@ -20,7 +20,7 @@ final class Images {
 
             let image = UIImage(data: imageData)
             DispatchQueue.main.async {
-                completion(image)
+                completion(image, data, dataIndex)
             }
         }
     }

@@ -48,3 +48,41 @@ struct fullFormTF : View {
                         ).padding()
     }
 }
+struct CustomTextField_V3 : View {
+     var placeholder : String
+     var target : String
+    var limit : Int?
+    @Binding var txt: String
+    
+    var body : some View {
+        VStack {
+            HStack {
+                Text(target)
+                    .foregroundColor(Color.gray)
+                    .font(.callout)
+                
+                Spacer()
+            }.padding([.leading, .trailing], 30)
+            .padding(.bottom, -7)
+            
+            
+            RoundedRectangle(cornerRadius: 5).foregroundColor(Color.init(hex: "#F0F0F0").opacity(0.95))
+                
+                .overlay(  TextField(self.placeholder, text: $txt)
+                            .font(.system(size: 15))
+                            .padding()
+                            .foregroundColor(Color.black)
+                            .padding(.leading, 5)
+                            .padding([.top, .bottom], 0)
+                            .onChange(of: self.txt, perform: { value in
+                                if let max = self.limit {
+                                    txt = txt.limit(limit: max)
+                                }
+                              })
+                )
+                            
+                .padding([.leading, .trailing], 30)
+                .frame(height: 50)
+        }
+    }
+}

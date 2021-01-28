@@ -15,7 +15,7 @@ struct LoginView: View {
     
     @StateObject var model = ModelData()
     var body: some View {
-            if(UserDefaults.standard.bool(forKey: "LoggedIn") == true || model.loggedIn){
+            if(((UserDefaults.standard.bool(forKey: "LoggedIn") == true || model.loggedIn))){
                 NavigationController()
             }
             else{

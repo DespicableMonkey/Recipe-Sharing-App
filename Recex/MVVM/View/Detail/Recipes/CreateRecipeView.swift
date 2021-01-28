@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SPAlert
 
 
 struct CreateRecipeView: View {
@@ -63,15 +63,12 @@ struct CreateRecipeView: View {
                             .font(.title)
                             .fontWeight(.bold)
                             .padding()
-                        CustomTextField_V2(placeholder: "Recipe Title", txt: $model.recipeTitle, fontSize: .title)
                         
-                        CustomTextField_V2(placeholder: "Short Description", txt: $model.description, fontSize: .title3)
-                        
-                        CustomTextField_V2(placeholder: "Serves: 3 people", txt: $model.servings, fontSize: .title3)
-                        
-                        CustomTextField_V2(placeholder: "Cook Time: 45 minutes", txt: $model.cookTime, fontSize: .title3)
-                        
-                        CustomTextField_V2(placeholder: "Difficulty: Meduim", txt: $model.difficulty, fontSize: .title3)
+                        CustomTextField_V3(placeholder: "Chocolate Chip Cookies", target: "Recipe Title", limit: 64, txt: $model.recipeTitle)
+                        CustomTextField_V3(placeholder: "A spectacular mix of chocolate and batter", target: "Short Description", limit: 64, txt: $model.description)
+                        CustomTextField_V3(placeholder: "3 People", target: "Servings", limit: 64, txt: $model.servings)
+                        CustomTextField_V3(placeholder: "45 Minutes", target: "Cook Time", limit: 64, txt: $model.cookTime)
+                        CustomTextField_V3(placeholder: "Medium", target: "Difficulty", limit: 64, txt: $model.difficulty)
                     }.padding()
                     
                 }
@@ -87,15 +84,16 @@ struct CreateRecipeView: View {
                             .padding()
                         ForEach(0..<model.ingredients.count, id: \.self){ index in
                             HStack {
+                                CustomTextField_V3(placeholder: "250ml Water", target: "", limit: 64, txt: $model.ingredients[index])
                                 Image(systemName: "trash")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(Color.red)
                                     .onTapGesture {
                                         if(model.ingredients.count > 1){
                                             model.ingredients.remove(at: index)
                                         }
                                     }
-                                    
-                                CustomTextField_V2(placeholder: "250ml Water", txt: $model.ingredients[index], fontSize: .title3)
-                                    .frame(width: UIScreen.main.bounds.width)
                             }
                         }
                         
@@ -154,6 +152,11 @@ struct CreateRecipeView: View {
 
             
         }.background(Color.gray.opacity(0.05))
+        .onReceive(model.viewDismissalModePublisher) { shouldDismiss in
+            if shouldDismiss {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 

@@ -15,45 +15,109 @@ struct CommunityListView: View {
     
     var body: some View {
             VStack (spacing: 5){
-                if(model.communities.count == 0) {
-                    NoCommunitiesListView(createCommunityIsPresented: self.$createCommunityIsPresented)
-                } else {
-                    ScrollView(.vertical, showsIndicators: false, content: {
-                        VStack {
-                            ForEach(0..<model.communities.count, id:\.self) {index in
-                                NavigationLink(destination: CommunityView(community: model.communities[index])) {
-                                    CommunityListResultView(community: model.communities[index])
+                ZStack{
+                    if(model.communities.count == 0) {
+                        NoCommunitiesListView(createCommunityIsPresented: self.$createCommunityIsPresented)
+                    } else {
+                        ScrollView(.vertical, showsIndicators: false, content: {
+                            VStack {
+                                ForEach(model.communities) {community in
+                                    NavigationLink(destination: CommunityView(community: community)) {
+                                        CommunityListResultView(community: community)
+                                    }
+                                   // if(index != model.communities.count - 1) {
+                                        Divider()
+                                            .padding([.leading, .trailing])
+                                            .padding([.top], 10)
+                                   // }
+                                }.padding()
+                                Button(action: {self.createCommunityIsPresented.toggle()}) {
+                                    VStack {
+                                        Text("Create New Community")
+                                            .foregroundColor(Color.white)
+                                            .font(.title2)
+                                            .fontWeight(.bold)
+                                            .padding()
+                                    }
+                                    .background(Color("ColorThemeMain"))
+                                    .cornerRadius(15)
                                 }
-                                if(index != model.communities.count - 1) {
-                                    Divider()
-                                        .padding([.leading, .trailing])
-                                        .padding([.top], 10)
+                                
+                                Button(action: {
+                                    withAnimation() {
+                                        self.model.joinCommunityModal.toggle()
+                                    }
+                                }) {
+                                    VStack {
+                                        Text("Join A Community")
+                                            .foregroundColor(Color.white)
+                                            .font(.title2)
+                                            .fontWeight(.bold)
+                                            .padding()
+                                    }
+                                    .background(Color("ColorThemeMain"))
+                                    .cornerRadius(15)
+                                    .sheet(isPresented: self.$createCommunityIsPresented, content: { CreateCommunityView()})
                                 }
+                                
+                                Spacer()
+                            }
+                        })
+                        
+                    }
+                
+                    if(self.model.joinCommunityModal) {
+                        BottomSheetView(isOpen: $model.joinCommunityModal, maxHeight: 450, minHeightRatio: 0) {
+                        if(model.joinLoading) {
+                            InBuiltLoadingView(animation: true, size: 75)
+                        } else {
+                        VStack(spacing: 10) {
+                            Text("Join a Community")
+                                .font(.title)
+                            CustomTextField_V3(placeholder: "e.g. H78HD62K", target: "Enter Community Join Code", limit: 8, txt: self.$model.joinTxt)
+                            Button(action: {
+                                self.model.joinCommunity()
+                            }, label: {
+                                Text("Join")
+                                    .padding([.top, .bottom], 8)
+                                    .padding([.trailing, .leading], 15)
+                                    .frame(width: UIScreen.main.bounds.width - 40)
+                                    .foregroundColor(Color.white)
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                            })
+                            
+                            if(model.joinCodeError.count > 0) {
+                                Text(model.joinCodeError)
+                                    .foregroundColor(Color.red)
+                                    .padding()
                             }
                             
+                            
+                            
+
                             Divider()
-                                .padding()
+                                                
                             
-                            Button(action: {self.createCommunityIsPresented.toggle()}) {
-                                VStack {
-                                    Text("Create New Community")
-                                        .foregroundColor(Color.white)
-                                        .font(.title2)
-                                        .fontWeight(.bold)
-                                        .padding()
-                                }
-                                .background(Color("ColorThemeMain"))
-                                .cornerRadius(15)
+                            HStack{
+                                Text("If you do not have a join code, you can scan a QR code or use a link given to you by a member within the community. If the community is public you can also join it by searching for the community in the Explore Tab.")
+                                    .padding()
+                                Spacer()
                             }
-                            
-                            Spacer()
                         }
-                    })
+                        }
+                        
+                        } .edgesIgnoringSafeArea(.all)
+                        .allowsHitTesting(model.joinCommunityModal ? true : false)
+                    }
+                
                 }
+                
             }
-            .sheet(isPresented: self.$createCommunityIsPresented, content: {
-                CreateCommunityView()
-            })
+        
+//        .sheet(isPresented: $model.openQRCode, content: {
+//            InviteFriends(community: self.model.community)
+//        })
     }
 }
 
@@ -89,7 +153,8 @@ struct NoCommunitiesListView : View {
 }
 
 struct CommunityListResultView : View {
-    @State var community : Community
+    @ObservedObject var community : Community
+    
     var body : some View {
         VStack {
             HStack{

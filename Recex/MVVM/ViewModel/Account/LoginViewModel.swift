@@ -49,9 +49,9 @@ class ModelData : ObservableObject {
                 return
             }
             else if(response == .success){
-                let ud = UserDefaults.standard
-                ud.setValue(true, forKey: "LoggedIn")
-                self.loggedIn = true
+                AS.set(for: "PersonID", user_cons.PersonID)
+                AS.set(for: "LoggedIn", true)
+                AS.set(for: "FinishedSignUp", false)
                 return
             }
             else if(response == .customResponse1){
@@ -93,9 +93,9 @@ class ModelData : ObservableObject {
                 return
             }
             else if (response == .success) {
-                let ud = UserDefaults.standard
-                ud.setValue(true, forKey: "LoggedIn")
-                ud.setValue(user_cons.PersonID, forKey: "PersonID")
+                AS.set(for: "PersonID", user_cons.PersonID)
+                AS.set(for: "LoggedIn", true)
+                AS.set(for: "FinishedSignUp", true)
                 self.loggedIn = true
                 return
             }

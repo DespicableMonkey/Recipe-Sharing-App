@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct NeededIngredients: View {
-    @StateObject var model = NeededIngredientsViewModel()
+struct  OwnedIngredientsView: View {
+    @StateObject var model = OwnedIngredientsViewModel()
     @Environment(\.presentationMode) var presentationmode
     
     @State var search = false
@@ -26,7 +26,7 @@ struct NeededIngredients: View {
                         .foregroundColor(.black)
                 }
                 
-             Text("Needed Ingredients")
+             Text("Owned Ingredients")
                 .font(.title)
                 .fontWeight(.heavy)
                 Spacer()
@@ -37,7 +37,7 @@ struct NeededIngredients: View {
             ScrollView(.vertical, showsIndicators: false){
                 LazyVStack (spacing: 0){
                     ForEach(model.ingredients, id: \.self){ ingredient in
-                        IngredientView(ingredient: ingredient,ingredients:  $model.ingredients, group: "needed_ingredients")
+                        IngredientView(ingredient: ingredient,ingredients:  $model.ingredients, group: "owned_ingredients")
                         
                     }
                 }
@@ -66,7 +66,7 @@ struct NeededIngredients: View {
                         .frame(width: UIScreen.main.bounds.width - 30)
                         .background(Color(#colorLiteral(red: 0.2458183467, green: 0.6090428233, blue: 1, alpha: 1)))
                         .cornerRadius(15)
-                        .sheet(isPresented: self.$search, onDismiss: {self.model.getIngredients()}, content: { IngredientSearchView(target: "needed_ingredients") })
+                        .sheet(isPresented: self.$search, onDismiss: {self.model.getIngredients()}, content: { IngredientSearchView( target: "owned_ingredients") })
                 }
             }
         }.background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)).ignoresSafeArea())
@@ -75,11 +75,5 @@ struct NeededIngredients: View {
         return model.ingredients.firstIndex { (lookup) -> Bool in
             return item.id == lookup.id
         } ?? 0
-    }
-}
-
-struct NeededIngredients_Previews: PreviewProvider {
-    static var previews: some View {
-        NeededIngredients()
     }
 }

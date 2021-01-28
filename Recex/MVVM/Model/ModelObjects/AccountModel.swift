@@ -53,9 +53,9 @@ struct AccountModel {
         let registerRequestJSON = SignUpJSONModel(authentication_key: "_", request: requests[.signUp] ?? "", email: email, password: hashAndSalt[0], salt: hashAndSalt[1])
         guard let registerRequestJSONData = try? JSONEncoder().encode(registerRequestJSON) else { return .error }
         firstly {
-            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: registerRequestJSONData, jsonModel: SignUpJSONModel.self, responseFormat: .basic)
+            query.Request(urlString: URLs["authenticationURL"] ?? "", jsonData: registerRequestJSONData, jsonModel: SignUpJSONModel.self, responseFormat: .withInfo)
         }.done { (response : HTTPResponse) in
-            guard let convertedResponse = (response as? BasicHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
+            guard let convertedResponse = (response as? ResponseWithInfoHTTPResponse) else { throw RuntimeError("Server Failed to Respond")}
             let verdict : validationResponses = {
                 switch(convertedResponse.result){
                     case "account_created": return .success
@@ -63,6 +63,12 @@ struct AccountModel {
                     default: return .error
                 }
             }()
+            
+            if(verdict == .success) {
+                user_cons.PersonID = convertedResponse.info
+                let user : User = .shared
+                user = User(PersonID: user_cons.PersonID)
+            }
             completion(verdict, nil)
         }.catch { (error : Error) in
             switch (error){
